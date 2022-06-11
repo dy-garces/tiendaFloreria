@@ -1,11 +1,17 @@
 from django.shortcuts import render, redirect
 
+from productos.models import Producto
+
 from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login
 
 
 def home(request):
-    return render(request,'home.html',{ })
+    productos = Producto.objects.all()
+    contexto ={
+        'productos' : productos
+    }
+    return render(request,'home.html',contexto)
 
 def registro(request):
     data = {

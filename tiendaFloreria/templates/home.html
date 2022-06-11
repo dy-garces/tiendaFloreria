@@ -61,62 +61,20 @@
     </section>
     
     <section>
-        <div class="container p-0  ">
+        <div class="container">
             <div class="row d-flex justify-content-center mx-0">
-                <div class="col-lg-3 col-sm-6 text-center border shadow m-3 ">
-                    <img src="{% static 'img/card1.jpg' %}" alt="" class="img-fluid">
-                    <h3>Canelo</h3>
-                    <p>Precio: 3500</p>
-                </div>
-                <div class="col-lg-3 col-sm-6 text-center border shadow m-3">
-                    <img src="{% static 'img/card2.jpg' %} " alt="" class="img-fluid">
-                    <h3>Naranjo</h3>
-                    <p>Precio: 15000</p>
-                </div>
-                <div class="col-lg-3 col-sm-6 text-center border shadow m-3">
-                    <img src=" {% static 'img/card3.jpg'%}" alt="" class="img-fluid">
-                    <h3>Plantita</h3>
-                    <p>Precio: 3500</p>
-                </div>
-    
-    
-            </div>
-            <div class="row d-flex justify-content-center mx-0">
-                <div class="col-lg-3 col-sm-6 text-center border shadow m-3">
-                    <img src=" {% static 'img/card4.jpg' %} " alt="" class="img-fluid">
-                    <h3>Helecho</h3>
-                    <p>Precio: 3500</p>
-                </div>
-    
-    
-                <div class="col-lg-3 col-sm-6 text-center border shadow m-3">
-                    <img src=" {% static 'img/card5.jpg' %} " alt="" class="img-fluid">
-                    <h3>Olivo</h3>
-                    <p>Precio: 3500</p>
-                </div>
-                <div class="col-lg-3 col-sm-6 text-center border shadow m-3">
-                    <img src=" {% static 'img/card6.jpg' %} " alt="" class="img-fluid">
-                    <h3>Plantoide</h3>
-                    <p>Precio: 3500</p>
-                </div>
-            </div>
-            <div class="row d-flex justify-content-center mx-0">
-                <div class="col-lg-3 col-sm-6 text-center border shadow m-3">
-                    <img src=" {% static 'img/card7.jpg' %} " alt="" class="img-fluid">
-                    <h3>Plantota</h3>
-                    <p>Precio: 3500</p>
-                </div>
-                <div class="col-lg-3 col-sm-6 text-center border shadow m-3">
-                    <img src=" {% static 'img/card8.jpg'%} " alt="" class="img-fluid">
-                    <h3>Plantoide</h3>
-                    <p>Precio: 3500</p>
-                </div>
-                <div class="col-lg-3 col-sm-6 text-center border shadow m-3">
-                    <img src="{% static 'img/card8.jpg' %}" alt="" class="img-fluid">
-                    <h3>Plantoide</h3>
-                    <p>Precio: 3500</p>
-                </div>
+                    {% for p in productos %}
+                            <div class="col-lg-3 col-sm-6 text-center border shadow m-3 ">
+                                {% if p.imagen %}
+                                    <img src="{{ p.imagen.url }} " alt="imagen" class="img-fluid">
+                                {% endif %}
+                                <h3>{{ p.nombre}}</h3>
+                                <p>Precio: {{ p.precio }}</p>
+                                <a href="#" class="btn btn-success btn-sm mb-3 " role="button"> Ver Detalle.</a>                                               
+                            </div>
+                    {% endfor %}
             </div>
         </div>
     </section>
+
 {% endblock contenido %}
