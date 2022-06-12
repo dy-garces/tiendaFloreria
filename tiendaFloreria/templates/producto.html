@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block contenido %}
+<section>
+    <div class="p-5 bg-light">
+        <div class="container">
+            <h1 class="display-3 text-center bg-light">Detalle</h1>
+        </div>
+    </div>
+</section>
+
+<section>
+        <div class="container mt-5">
+          <div class="row shadow m-3 border rounded">
+            <div class="col-sm-4">
+                {% if producto.imagen %}
+                
+                <img src="{{ producto.imagen.url }} " alt="imagen" class="img-fluid m-3">
+            {% endif %}
+            </div>
+            <div class="col-sm-8">
+              <h2 class="m-3">Nombre: {{ producto.nombre | title}}</h2>
+              <br>
+              <h3 class="m-3">Precio: {{producto.precio | intcomma}}</h3>
+              <br>
+              <p class="m-3">{{producto.descripcion}}</p>
+                <div class="d-flex justify-content-end">
+                  <div>
+               
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+</section>
+
+
+{% endblock contenido %}

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block contenido %}
 
     <section>
@@ -68,8 +69,8 @@
                                 {% if p.imagen %}
                                     <img src="{{ p.imagen.url }} " alt="imagen" class="img-fluid">
                                 {% endif %}
-                                <h3>{{ p.nombre}}</h3>
-                                <p>Precio: {{ p.precio }}</p>
+                                <h3>{{ p.nombre | title }}</h3>
+                                <p>Precio: {{ p.precio | intcomma}}</p>
                                 <a href="#" class="btn btn-success btn-sm mb-3 " role="button"> Ver Detalle.</a>                                               
                             </div>
                     {% endfor %}

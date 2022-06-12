@@ -15,15 +15,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+
+from productos.views import PrductoListaView
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.home,name="home"),
+    path('',PrductoListaView.as_view(),name="home"),
     path('accounts/',include('django.contrib.auth.urls')),
     path('registro',views.registro, name="registro"),
+    path('flores/',views.flores,name="flores"),
+    path('plantas/',views.plantas,name="plantas"),
+    path('arboles/',views.arboles,name="arboles"),
+    path('maceteros',views.maceteros,name="maceteros"),
+    path('jardineria/',views.jardineria,name="jardineria"),
+    path('producto/<id>',views.producto, name="producto"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
