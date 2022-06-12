@@ -1,23 +1,48 @@
 import imp
 from django.shortcuts import get_object_or_404, render
-from .utilis import obtener_o_crear_carrito
-from productos.models import Producto
+from .models import Carrito
+from .models import Producto
 # Create your views here.
 
 def carrito(request):
-    carrito = obtener_o_crear_carrito(request)
+    usuario = request.user if request.user.is_authenticated else None
+    carrito_id = request.session.get('carrito_id')
+    carrito = Carrito.objects.filter(id = carrito_id).first()
+    
+    if carrito is None:
+        carrito = Carrito.objects.create(usuario = usuario)
+        
+    if usuario and carrito.usuario is None:
+        carrito.usuario = usuario
+        carrito.save()
+        
+    request.session['carrito_id'] = carrito.id
     
     return render(request, 'carrito/carrito.html')
 
 def agregar(request):
-    carrito = obtener_o_crear_carrito(request)
-    product = Producto( pk=request.POST.get('producto_id'))
+    usuario = request.user if request.user.is_authenticated else None
+    carrito_id = request.session.get('carrito_id')
+    carrito = Carrito.objects.filter(id = carrito_id).first()
     
-    print(product)
+    if carrito is None:
+        carrito = Carrito.objects.create(usuario = usuario)
+        
+    if usuario and carrito.usuario is None:
+        carrito.usuario = usuario
+        carrito.save()
+        
+    request.session['carrito_id'] = carrito.id
     
-    carrito.productos.add(product)
+    producto = get_object_or_404(Producto,id=request.POST.get('producto_id'))
+    print(producto)
+    print(carrito)
+    
+    carrito.productos.add(producto)
     
     contexto={
-        'product': product
+        'producto': producto
     }
     return render(request,'carrito/agregar.html',contexto)
+
+
