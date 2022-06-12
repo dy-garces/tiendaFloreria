@@ -11,13 +11,13 @@ def carrito(request):
 
 def agregar(request):
     carrito = obtener_o_crear_carrito(request)
-    producto = get_object_or_404(Producto, pk=request.POST.get('producto_id'))
+    product = Producto( pk=request.POST.get('producto_id'))
     
-    print(producto)
+    print(product)
     
-    carrito.productos.add(producto)
+    carrito.productos.add(product)
     
     contexto={
-        'producto': producto
+        'product': product
     }
     return render(request,'carrito/agregar.html',contexto)

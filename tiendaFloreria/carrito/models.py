@@ -11,4 +11,4 @@ class Carrito(models.Model):
     fecha_carrito = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return str(self.producto) 
+        return str(self.id) 
