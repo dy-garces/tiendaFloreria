@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'productos',
     'django.contrib.humanize',
+    'carrito',
+    'usuarios',
     
 ]
 

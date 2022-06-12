@@ -32,6 +32,7 @@ urlpatterns = [
     path('maceteros',views.maceteros,name="maceteros"),
     path('jardineria/',views.jardineria,name="jardineria"),
     path('productos/',include('productos.urls')),
+    path('carrito/',include('carrito.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
