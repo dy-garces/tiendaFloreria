@@ -17,7 +17,7 @@
         <div class="row">
             {% for p in productos %}
             {% if p.categoria_id == 3 %}
-                {% include 'productos/snippets/productos.html'%}
+                {% include 'productos/snippets/productos.html' with productos=p%}
             {% endif %}
             {% endfor %}
         </div>

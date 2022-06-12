@@ -8,10 +8,7 @@
     
             <div class="row d-flex justify-content-center p-2">
                 <div class="col-6">
-                    <form class="d-flex justify-content-center">
-                    <input class="form-control me-2" type="text" placeholder="Buscar">
-                    <button type="button" class="btn btn-success">Buscar</button>
-                    </form>
+                     {% include 'productos/snippets/buscador.html' %}
                 </div>
             </div>
     
@@ -65,7 +62,7 @@
         <div class="container mb-3">
             <div class="row">
                     {% for p in productos %}
-                        {% include 'productos/snippets/productos.html'%}
+                        {% include 'productos/snippets/productos.html' with productos=p %}
                     {% endfor %}
             </div>
         </div>
