@@ -10,17 +10,7 @@ class Categoria(models.Model):
     def __str__(self):
         return self.nombre
 
-class Producto(models.Model):
-    nombre =  models.CharField(max_length=50)
-    imagen = models.ImageField(upload_to="productos",null=False, blank=False)
-    descripcion = models.TextField()
-    precio = models.IntegerField(default=0)
-    slug = models.SlugField(null=False, blank=False , unique=True)
-    creacion = models.DateTimeField(auto_now_add=True)
-    categoria =  models.ForeignKey(Categoria, on_delete=models.PROTECT)
-    
-    def __str__(self):
-        return self.nombre
+
     
 def set_slug(sender, instance, *args, **kwargs):
     if instance.nombre and not instance.slug:
