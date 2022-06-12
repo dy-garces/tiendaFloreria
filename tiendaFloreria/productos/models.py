@@ -12,7 +12,7 @@ class Categoria(models.Model):
 
 class Producto(models.Model):
     nombre =  models.CharField(max_length=50)
-    imagen = models.ImageField(upload_to="productos",null=True)
+    imagen = models.ImageField(upload_to="productos",null=False, blank=False)
     descripcion = models.TextField()
     precio = models.IntegerField(default=0)
     slug = models.SlugField(null=False, blank=False , unique=True)
