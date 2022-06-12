@@ -1,0 +1,19 @@
+{% load humanize %}
+
+<div class=" col-sm-6 col-md-4  col-xs-12 mt-5 ">
+    <div class="card  h-100 border shadow">
+        {% if p.imagen %}
+        <img src="{{ p.imagen.url }}" alt="imagen del producto" class="img-fluid">
+        {% endif %}
+        <div class="card-body">
+            <h3 class="card-title">{{ p.nombre | title }}</h3>
+            <p>Precio: {{ p.precio | intcomma}}</p>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-center">
+                <a href="#" class="btn btn-success"> Ver más</a>
+            </div>
+           
+        </div>
+    </div>                                   
+</div>
