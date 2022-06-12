@@ -3,7 +3,6 @@
 {% load humanize %}
 {% block contenido %}
 
-   
     <div class="container p-5">
         {% if carrito.productos.exists %}
         <div class="row">
@@ -44,8 +43,17 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-4">
-
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="font-weigth-bold">
+                            Subtotal({{ carrito.productos.count }}):<span class="text-succes"> {{carrito.subtotal | intcomma}}</span>
+                        </div>
+                        <div class="mt-2">
+                            <a href="#" class="btn btn-success">Pagar</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         {% else %}
