@@ -11,7 +11,8 @@ class Producto(models.Model):
     nombre =  models.CharField(max_length=50)
     imagen = models.ImageField(upload_to="productos",null=True)
     descripcion = models.TextField()
-    precio = models.DecimalField(max_digits=15, decimal_places=2, default=0.0)
+    precio = models.IntegerField(default=0)
+    slug = models.SlugField(null=False, blank=False , unique=True)
     creacion = models.DateTimeField(auto_now_add=True)
     categoria =  models.ForeignKey(Categoria, on_delete=models.PROTECT)
     

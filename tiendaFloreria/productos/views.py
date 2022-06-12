@@ -11,10 +11,14 @@ class PrductoListaView(ListView):
     
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs) 
-        context['message'] = 'Listado de Productos'
         context['productos'] = context['producto_list']
-        
-        print(context)
-        
+                
         return context
     
+class ProductoDetalleView(DetailView):
+    model = Producto
+    template_name = 'productos/producto.html'
+    
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)    
+        return context
