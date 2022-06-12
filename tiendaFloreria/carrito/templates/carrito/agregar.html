@@ -12,6 +12,7 @@
 
 <div class="container">
     <div class="row border rounded shadow m-3">
+      
         <div class="col-3">
             {% if producto.imagen %}
                 <img src="{{ producto.imagen.url }} " alt="imagen" class="img-fluid m-3" width="200" height="200">
@@ -27,9 +28,10 @@
                 </a>
             </div>
             <div class=" font-weigth-bold text-success">
-                ${{ producto.precio}}
+                ${{ producto.precio | intcomma }}
             </div>
         </div>
+    
     </div>
 </div>
 

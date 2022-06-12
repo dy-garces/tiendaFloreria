@@ -2,5 +2,58 @@
 {% load static %}
 {% load humanize %}
 {% block contenido %}
-    <h2>Carrito</h2>
+
+   
+    <div class="container p-5">
+        {% if carrito.productos.exists %}
+        <div class="row">
+            <div class="col-8">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for productos in carrito.productos.all %}
+                            <tr>
+                                <th>
+                                    {{ forloop.counter }}
+                                </th>
+                                <th>
+                                    {% if productos.imagen %}
+                                        <img src="{{ productos.imagen.url }} " alt="imagen" class="img-fluid m-3" width="150" height="150">
+                                    {% endif %}
+                                </th>
+                                <th>
+                                    <a href="{% url 'productos:producto' productos.slug %}"> {{productos.nombre}}</a>
+                                    {% include 'carrito/snippets/eliminar.html' %}
+                                </th>
+                                <th>
+                                    1
+                                </th>
+                                <th>
+                                    <span class="font-weigth-bold text-success">   ${{ productos.precio | intcomma }} </span>
+                                </th>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-4">
+
+            </div>
+        </div>
+        {% else %}
+        <div class="h3 m-3">
+            <p>Tu carrito de compras esta vacio</p>
+            <a href="{% url 'home' %}">Seguir Comprando</a>
+        </div>
+    {% endif %}
+    </div>
+    
 {% endblock contenido %}
