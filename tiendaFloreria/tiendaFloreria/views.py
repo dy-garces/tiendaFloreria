@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
 
 from productos.models import Producto
-
+from carrito.models import Carrito
+from carrito.utilis  import obtener_o_crear_carrito
 from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login
 
@@ -65,3 +66,4 @@ def jardineria(request):
 def producto(request):
     
     return render(request,"producto.html")
+

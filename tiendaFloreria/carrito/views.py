@@ -1,4 +1,4 @@
-import imp
+
 from django.shortcuts import get_object_or_404, render
 from .utilis import obtener_o_crear_carrito
 from productos.models import Producto
@@ -7,17 +7,13 @@ from productos.models import Producto
 def carrito(request):
     carrito = obtener_o_crear_carrito(request)
     
-    return render(request, 'carrito/carrito.html')
+    return render(request,'carrito/carrito.html')
 
 def agregar(request):
     carrito = obtener_o_crear_carrito(request)
-    product = Producto( pk=request.POST.get('producto_id'))
+    producto =  Producto(pk=request.POST.get('product_id'))
     
-    print(product)
+    print(producto)
+    carrito.producto.add(producto)
     
-    carrito.productos.add(product)
-    
-    contexto={
-        'product': product
-    }
-    return render(request,'carrito/agregar.html',contexto)
+    return render(request, 'agregar.html', {'producto': producto})
