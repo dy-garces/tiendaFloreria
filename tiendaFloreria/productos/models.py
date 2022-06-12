@@ -22,6 +22,7 @@ class Producto(models.Model):
     def __str__(self):
         return self.nombre
     
+    
 def set_slug(sender, instance, *args, **kwargs):
     if instance.nombre and not instance.slug:
         slug = slugify(instance.nombre) 
