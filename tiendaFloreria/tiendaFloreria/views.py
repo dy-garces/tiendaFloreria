@@ -62,9 +62,6 @@ def jardineria(request):
     }
     return render(request,"jardineria.html",contexto)
 
-def producto(request,id):
-    producto = get_object_or_404(Producto, id=id)
-    data = {
-        'producto' : producto
-    }
-    return render(request,"producto.html",data)
+def producto(request):
+    
+    return render(request,"producto.html")
