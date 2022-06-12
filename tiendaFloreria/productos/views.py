@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-import productos
 from productos.models import Producto
 from django.db.models import Q
 
@@ -29,6 +28,7 @@ class ProductoBuscarListView(ListView):
     template_name = 'productos/buscador.html'
     
     def get_queryset(self):
+        
         return Producto.objects.filter(nombre__icontains=self.query())
     
     def query(self):
