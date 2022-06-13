@@ -1,0 +1,19 @@
+{% load humanize %}
+
+<div class="row mt-3">
+    <div class="col-2 ">
+        {% if producto.imagen %}
+            <img src="{{ producto.imagen.url }}" alt="imagen del producto" class="img-fluid" width="200" height="200">
+        {% endif %}
+    </div>
+    <div class="col-2 ">
+        <div class="row">
+            <strong>
+                <a href="{% url 'productos:producto' producto.slug%}"> {{ producto.nombre}}</a>
+            </strong>
+        </div>
+        <div class="row">
+            <strong class="text-danger">{{ producto.precio | intcomma }}</strong>
+        </div>
+    </div>
+</div>

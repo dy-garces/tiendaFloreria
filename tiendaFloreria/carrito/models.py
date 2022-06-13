@@ -19,7 +19,7 @@ class Carrito(models.Model):
     def actualizar_subtotal(self):
         self.subtotal =  sum([
            cp.cantidad * cp.producto.precio for cp in self.productos_relacion()
-        ]) 
+        ])         
         self.save()
 
     def productos_relacion(self):
