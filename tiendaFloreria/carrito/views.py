@@ -41,10 +41,6 @@ def agregar(request):
                                                     producto=producto, 
                                                     cantidad = cantidad)
     
-    #carrito.productos.add(producto, through_defaults={
-    #    'cantidad': cantidad
-    #})
-    
     return render(request,'carrito/agregar.html',{'producto': producto, })
 
 def eliminar(request):
@@ -66,6 +62,3 @@ def eliminar(request):
     carrito.productos.remove(producto)
     
     return redirect('carrito:carrito')
-    
-
-

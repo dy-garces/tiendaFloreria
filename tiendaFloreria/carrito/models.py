@@ -3,7 +3,7 @@ import uuid
 from django.db import models
 from django.contrib.auth.models import User
 from productos.models import Producto
-from django.db.models.signals import pre_save,m2m_changed
+from django.db.models.signals import pre_save,m2m_changed, post_save
 # Create your models here.
 
 class Carrito(models.Model):
@@ -17,7 +17,9 @@ class Carrito(models.Model):
         return self.carrito_id 
     
     def actualizar_subtotal(self):
-        self.subtotal =  sum([producto.precio for producto in self.productos.all()]) 
+        self.subtotal =  sum([
+           cp.cantidad * cp.producto.precio for cp in self.productos_relacion()
+        ]) 
         self.save()
 
     def productos_relacion(self):
@@ -27,7 +29,7 @@ class Carrito(models.Model):
 class CarritoProductosManager(models.Manager):
     
     def crear_o_actualizar_cantidad(self,carrito, producto, cantidad=1):
-        object,created = self.get_or_create(carrito = carrito , producto = producto )
+        object , created = self.get_or_create(carrito = carrito , producto = producto )
         if not created:
             cantidad = object.cantidad + cantidad
         object.actualizar_cantidad(cantidad)
@@ -53,5 +55,9 @@ def actualizar_subtotal(sender, instance, action ,*args, **kwargs):
     if action == 'post_add' or action == 'post_remove' or action == 'post_clear':
         instance.actualizar_subtotal()
 
+def post_save_actualizar_subtotal(sender, instance, *args, **kwargs):
+    instance.carrito.actualizar_subtotal()
+
 pre_save.connect(set_carrito_id, sender=Carrito)
+post_save.connect(post_save_actualizar_subtotal, sender=CarritoProductos)
 m2m_changed.connect(actualizar_subtotal,sender=Carrito.productos.through)
