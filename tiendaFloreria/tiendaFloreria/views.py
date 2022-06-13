@@ -13,6 +13,12 @@ def home(request):
     }
     return render(request,'home.html',contexto)
 
+def quienesSomos(request):
+    return render(request,'quienesSomos.html')
+
+def contacto(request):
+    return render(request,'contacto.html')
+
 def registro(request):
     data = {
         'form': CustomUserCreationForm()

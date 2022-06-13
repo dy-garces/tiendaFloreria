@@ -14,7 +14,6 @@ class OrdenesStatus(Enum):
     
 choices = [( tag, tag.value) for  tag in OrdenesStatus]
 
-
 class Ordenes(models.Model):
     orden_id = models.CharField(max_length=100, null=False, blank=False, unique=True)
     usuario = models.ForeignKey(User, on_delete = models.CASCADE)

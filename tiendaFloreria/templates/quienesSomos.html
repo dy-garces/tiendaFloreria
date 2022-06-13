@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="mt-4 p-5 mb-4 bg-secondary text-white rounded">
+                <h1 class="iniciose">¿Quienes somos?</h1>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <h1 style="text-align: center;">Encuentranos desde:</h1>
+    <h2 style="text-align: center;">Horario de atencion en tienda 08:00 A 20:00 Hrs</h2>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 d-flex justify-content-end">
+            <div class="card" style="width: 22rem; margin-top: 50px;">
+                <div class="card-body">
+                    <h5 class="card-title">ESTAMOS UBICADOS:</h5>
+                    <p class="card-text">MANUEL RODRIGUEZ #3854</p>
+                    <h5 class="card-title">Siguenos en nuestras redes Sociales</h5>
+                    <p class="card-text">Facebook</p>
+                    <p class="card-text">Instagram</p>
+                    <p class="card-text">Whatsapp:+56 9 9874 5612</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 d-flex justify-content-start">
+            <div class="card" style="width: 22rem; margin-top: 50px;">
+                <div class="card-body">
+                    <h5 class="card-title">SOMOS UNA TIENDA DE PLANTAS Y JARDINERIA
+                        QUE AYUDA A UNA FUNDACION SIN FINES DE LUCRO
+                        COMPRA UNA PLANTA Y PLANTAMOS UN ARBOL
+                        POR REGISTRARSE Y COMPRAR, TENDRAS UN DESCUENTO DEL 5%,
+                        AYUDANOS A MEJORAR NUESTRO MUNDO, HASLO POR TODOS!!!</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="gallery min-vh-80">
+    <div class="container-lg">
+        <div class="row gy-4 row-cols-1 row-cols-sm-2 row-cols-sm-3">
+            <div class="col">
+                <img src=" {% static 'img/plantita.jpg'%} " class="gallery-item" alt="Galeria">
+            </div>
+            <div class="col">
+                <img src=" {% static 'img/jijijsiii.jpg'%}" class="gallery-item" alt="Galeria">
+            </div>
+            <div class="col">
+                <img src=" {% static 'img/plantando.jpg'%} " class="gallery-item" alt="Galeria">
+            </div>
+            <div class="col">
+                <img src="  {% static 'img/minita.png' %}" class="gallery-item" alt="Galeria">
+            </div>
+            <div class="col">
+                <img src=" {% static 'img/jardineria.png'%}" class="gallery-item" alt="Galeria">
+            </div>
+            <div class="col">
+                <img src=" {% static 'img/jardineriafunda.png' %}" class="gallery-item" alt="Galeria">
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock contenido %}
