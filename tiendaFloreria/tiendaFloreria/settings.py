@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'carrito',
     'usuarios',
     'ordenes',
+    'direccion_envio',
     
 ]
 

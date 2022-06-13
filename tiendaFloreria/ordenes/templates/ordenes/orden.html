@@ -1,14 +1,10 @@
 {% extends 'base.html' %}
 {% block contenido %}
-
 <div class="container">
-    
     <div class="card border rounded shadow p-3 m-3">
-     
-      
-      
-    
-
+        {% block breadcrum%}
+            {% include 'ordenes/snippets/breadcrum.html'%}
+        {% endblock %}
     <div class="h3 mt-3">
         Revisa tu pedido
     </div>
