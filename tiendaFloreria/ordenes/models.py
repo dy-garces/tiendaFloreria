@@ -20,17 +20,18 @@ class Ordenes(models.Model):
     carrito = models.ForeignKey(Carrito, on_delete = models.CASCADE)
     status = models.CharField(max_length=50, choices=choices, default=OrdenesStatus.CREADO)
     total = models.IntegerField(default=0)
+    envio = models.IntegerField(default=15000)
     creacion = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return self.orden_id
     
-    def update_subtotal(self):
-        self.total = self.update_subtotal()
+    def update_total(self):
+        self.total = self.get_total()
         self.save()
     
     def get_total(self):
-        return self.carrito.subtotal
+        return self.carrito.total + self.envio
     
 def set_orden_id(sender, instance, *args, **kwargs):
     if not instance.orden_id:

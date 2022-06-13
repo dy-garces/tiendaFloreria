@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from .models import Ordenes
 from carrito.models import Carrito
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+
+@login_required(login_url='login')
 def orden(request):
     usuario = request.user if request.user.is_authenticated else None
     carrito_id = request.session.get('carrito_id')
