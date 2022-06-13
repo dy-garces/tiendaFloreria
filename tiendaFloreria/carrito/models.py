@@ -1,4 +1,4 @@
-from tkinter import CASCADE
+
 import uuid
 from django.db import models
 from django.contrib.auth.models import User
@@ -22,12 +22,28 @@ class Carrito(models.Model):
 
     def productos_relacion(self):
         return self.carritoproductos_set.select_related('producto')
+
+
+class CarritoProductosManager(models.Manager):
     
+    def crear_o_actualizar_cantidad(self,carrito, producto, cantidad=1):
+        object,created = self.get_or_create(carrito = carrito , producto = producto )
+        if not created:
+            cantidad = object.cantidad + cantidad
+        object.actualizar_cantidad(cantidad)
+        return object
+        
+
 class CarritoProductos(models.Model):
     carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-    cantidad = models.IntegerField()
+    cantidad = models.IntegerField(default=1)
     creacion = models.DateField(auto_now_add=True)
+    objects = CarritoProductosManager()
+    
+    def actualizar_cantidad(self, cantidad = 1 ):
+        self.cantidad = cantidad
+        self.save()
     
 def set_carrito_id(sender, instance, *args, **kwargs):
     if not instance.carrito_id:

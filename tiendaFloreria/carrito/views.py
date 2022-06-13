@@ -1,6 +1,6 @@
-import imp
+
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Carrito
+from .models import Carrito, CarritoProductos
 from .models import Producto
 # Create your views here.
 
@@ -35,12 +35,15 @@ def agregar(request):
     request.session['carrito_id'] = carrito.id
     
     producto = get_object_or_404(Producto,id=request.POST.get('producto_id'))
-    cantidad = request.POST.get('cantidad')
-    print(cantidad)
+    cantidad = int(request.POST.get('cantidad',1))
+
+    carrito_producto = CarritoProductos.objects.crear_o_actualizar_cantidad(carrito=carrito, 
+                                                    producto=producto, 
+                                                    cantidad = cantidad)
     
-    carrito.productos.add(producto, through_defaults={
-        'cantidad': cantidad
-    })
+    #carrito.productos.add(producto, through_defaults={
+    #    'cantidad': cantidad
+    #})
     
     return render(request,'carrito/agregar.html',{'producto': producto, })
 
