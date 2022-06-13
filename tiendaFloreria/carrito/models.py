@@ -8,7 +8,7 @@ from django.db.models.signals import pre_save,m2m_changed
 
 class Carrito(models.Model):
     carrito_id = models.CharField(max_length=100, null=False, blank=False, unique=True)
-    usuario = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)#relacion uno a muchos
+    usuario = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE) #relacion uno a muchos
     productos = models.ManyToManyField(Producto, through='CarritoProductos')
     subtotal = models.IntegerField(default = 0)
     fecha_carrito = models.DateTimeField(auto_now_add=True)
@@ -20,10 +20,13 @@ class Carrito(models.Model):
         self.subtotal =  sum([producto.precio for producto in self.productos.all()]) 
         self.save()
 
+    def productos_relacion(self):
+        return self.carritoproductos_set.select_related('producto')
+    
 class CarritoProductos(models.Model):
     carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-    cantidad = models.IntegerField(default=1)
+    cantidad = models.IntegerField()
     creacion = models.DateField(auto_now_add=True)
     
 def set_carrito_id(sender, instance, *args, **kwargs):

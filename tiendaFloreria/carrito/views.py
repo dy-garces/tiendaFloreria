@@ -35,13 +35,14 @@ def agregar(request):
     request.session['carrito_id'] = carrito.id
     
     producto = get_object_or_404(Producto,id=request.POST.get('producto_id'))
+    cantidad = request.POST.get('cantidad')
+    print(cantidad)
     
-    carrito.productos.add(producto)
+    carrito.productos.add(producto, through_defaults={
+        'cantidad': cantidad
+    })
     
-    contexto={
-        'producto': producto
-    }
-    return render(request,'carrito/agregar.html',contexto)
+    return render(request,'carrito/agregar.html',{'producto': producto, })
 
 def eliminar(request):
     usuario = request.user if request.user.is_authenticated else None
