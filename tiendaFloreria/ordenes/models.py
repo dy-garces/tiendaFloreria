@@ -26,6 +26,10 @@ class Ordenes(models.Model):
     def __str__(self):
         return self.orden_id
     
+    def update_subtotal(self):
+        self.total = self.update_subtotal()
+        self.save()
+    
     def get_total(self):
         return self.carrito.subtotal
     
