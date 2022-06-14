@@ -4,6 +4,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from carrito.models import Carrito
 from enum import Enum
+
+
+from direccion_envio.models import DireccionEnvio
 # Create your models here.
 
 class OrdenesStatus(Enum):
@@ -22,10 +25,11 @@ class Ordenes(models.Model):
     total = models.IntegerField(default=0)
     envio = models.IntegerField(default=15000)
     creacion = models.DateTimeField(auto_now_add=True)
+    direccion_envio = models.CharField( max_length=200 ,null=True , blank=True,)
     
     def __str__(self):
         return self.orden_id
-    
+
     def update_total(self):
         self.total = self.get_total()
         self.save()
@@ -39,6 +43,7 @@ def set_orden_id(sender, instance, *args, **kwargs):
 
 def set_total(sender, instance, *args, **kwargs):
     instance.total = instance.get_total()
+    
 
 pre_save.connect(set_orden_id, sender=Ordenes)
 pre_save.connect(set_total, sender=Ordenes)

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block breadcrum %}
+    {% include 'ordenes/snippets/breadcrum.html'%}
+{% endblock  %}
+{% block contenido %}
+
+<div class="container">
+    <div class="card border rounded shadow p-3 m-3">
+        {% block breadcrumd %}
+            {% include 'ordenes/snippets/breadcrum.html'%}
+        {% endblock %}
+        {% if direccion_envio %}
+            <div class="h3 mt-3">
+               Recoge el pedido en el punto de entrega
+            </div>
+            <div class="mt-2 mb-2">
+                {% include 'direccion_envio/snippets/direccion_envio.html'%}
+             </div>
+        {% else %}
+        <div class="h3 mt-3">
+            Registra tu direccion de envio
+         </div>
+         
+         <div>
+            <a href="{% url 'direccion_envio:crear'%}" class="btn btn-success"> Registrar Direccion</a>
+         </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock contenido %}

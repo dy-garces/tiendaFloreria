@@ -3,26 +3,26 @@
 <div class="container">
     <div class="card border rounded shadow p-3 m-3">
         {% block breadcrum%}
-            {% include 'ordenes/snippets/breadcrum.html'%}
+        {% include 'ordenes/snippets/breadcrum.html'%}
         {% endblock %}
-    <div class="h3 mt-3">
-        Revisa tu pedido
-    </div>
-    <div class="row">
-        <div class="col-8">
-            <div class="card mt-3 mb-3">
-                <div class="card-body">
-                  {% for producto in carrito.productos.all  %}
-                      {% include 'ordenes/snippets/producto.html' %}
-                  {% endfor %}
+        <div class="h3 mt-3">
+            Revisa tu pedido
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="card mt-3 mb-3">
+                    <div class="card-body">
+                        {% for producto in carrito.productos.all %}
+                        {% include 'ordenes/snippets/producto.html' %}
+                        {% endfor %}
+                    </div>
                 </div>
-              </div>
-        </div>
-        <div class="col-4">
-            {% include 'ordenes/snippets/resumen.html' %}
+            </div>
+            <div class="col-4">
+                {% include 'ordenes/snippets/resumen.html' %}
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 {% endblock contenido %}

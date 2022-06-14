@@ -4,7 +4,8 @@ from .import views
 app_name = 'ordenes'
 
 urlpatterns = [
-    path('',views.orden, name="orden")
+    path('',views.orden, name="orden"),
+    path('direccion', views.direccion, name="direccion"),
 ]
 
 
