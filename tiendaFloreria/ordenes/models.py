@@ -37,6 +37,14 @@ class Ordenes(models.Model):
     def get_total(self):
         return self.carrito.total + self.envio
     
+    def cancelar(self):
+        self.status = OrdenesStatus.CANCELADO
+        self.save()
+    
+    def completar(self):
+        self.status = OrdenesStatus.COMPLETADO
+        self.save()
+    
 def set_orden_id(sender, instance, *args, **kwargs):
     if not instance.orden_id:
         instance.orden_id = str(uuid.uuid4())

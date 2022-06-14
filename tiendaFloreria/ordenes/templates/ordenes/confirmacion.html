@@ -45,9 +45,11 @@
             
             </div>
             <div class="col-12">
-                {% include 'ordenes/snippets/resumen.html' %}
+                {% url 'ordenes:completar' as next_url %}
+                {% include 'ordenes/snippets/resumen.html'  with next_url=next_url%}
                 <div class="mt-3 mb-3 d-flex justify-content-end">
-                    <a href="#" class="btn btn-danger"> cancelar orden</a>
+                    
+                    <a href="{% url 'ordenes:cancelar' %}" class="btn btn-danger"> cancelar orden</a>
                 </div>
             </div>
         </div>

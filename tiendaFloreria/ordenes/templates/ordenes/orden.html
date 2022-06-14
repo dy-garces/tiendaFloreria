@@ -19,7 +19,8 @@
                 </div>
             </div>
             <div class="col-4">
-                {% include 'ordenes/snippets/resumen.html' %}
+                {% url 'ordenes:direccion' as next_url %}
+                {% include 'ordenes/snippets/resumen.html' with next_url=next_url   %}
             </div>
         </div>
     </div>

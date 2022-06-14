@@ -12,3 +12,6 @@ def breadcrumb(productos = True, direccion = False , confirmacion = False, pago 
         
         
     ]
+
+def destruir_orden(request):
+    request.session['orden_id'] = None
