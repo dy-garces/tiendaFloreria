@@ -3,19 +3,9 @@ from django.db.models.signals import pre_save
 from django.db import models
 from django.contrib.auth.models import User
 from carrito.models import Carrito
-from enum import Enum
-
-
+from .common import OrdenesStatus, choices
 from direccion_envio.models import DireccionEnvio
 # Create your models here.
-
-class OrdenesStatus(Enum):
-    CREADO = 'CREADO'
-    PAGADO = 'PAGADO'
-    COMPLETADO = 'COMPLETADO'
-    CANCELADO = 'CANCELADO'
-    
-choices = [( tag, tag.value) for  tag in OrdenesStatus]
 
 class Ordenes(models.Model):
     orden_id = models.CharField(max_length=100, null=False, blank=False, unique=True)
@@ -52,6 +42,5 @@ def set_orden_id(sender, instance, *args, **kwargs):
 def set_total(sender, instance, *args, **kwargs):
     instance.total = instance.get_total()
     
-
 pre_save.connect(set_orden_id, sender=Ordenes)
 pre_save.connect(set_total, sender=Ordenes)

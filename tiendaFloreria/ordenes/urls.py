@@ -9,7 +9,9 @@ urlpatterns = [
     path('direccion', views.direccion, name="direccion"),
     path('confirmacion', views.confirmacion, name='confirmacion'),
     path('cancelar', views.cancelar, name='cancelar'),
-    path('completar', views.completar, name='completar')
+    path('completar', views.completar, name='completar'),
+    path('completados', views.OrdenesListView.as_view(), name='completados')
+    
 ]
 
 

@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import User
+from ordenes.common import OrdenesStatus
 from productos.models import Producto
 from django.db.models.signals import pre_save,m2m_changed, post_save
 # Create your models here.
@@ -40,7 +41,7 @@ class Carrito(models.Model):
     
     @property
     def orden(self):
-       return self.ordenes_set.first() 
+       return self.ordenes_set.filter(status=OrdenesStatus.CREADO).first() 
 
 
 class CarritoProductosManager(models.Manager):

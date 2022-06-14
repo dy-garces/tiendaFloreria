@@ -56,6 +56,11 @@
                             <a class="nav-link" href="{% url 'quienesSomos'%}">Quienes Somos</a>
                         </li>
                         {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'ordenes:completados'%}">Mis pedidoss</a>
+                        </li>
+                        {% endif %}
+                        {% if user.is_authenticated %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'direccion_envio:direccion_envio'%}">Direcciones</a>
                             </li>

@@ -1,4 +1,6 @@
+
 from django.shortcuts import redirect, render
+from ordenes.common import OrdenesStatus
 from .models import Ordenes
 from carrito.models import Carrito
 from django.contrib.auth.decorators import login_required
@@ -6,7 +8,9 @@ from .utilis import breadcrumb, destruir_orden
 from direccion_envio.models import DireccionEnvio
 from django.contrib import messages
 from carrito.utilis import destruir_carrito
-from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.list import ListView
+
 # Create your views here.
 
 
@@ -183,4 +187,11 @@ def completar(request):
     messages.success(request, 'Compra Completada exitosamente')
     return redirect('home')
     
+class OrdenesListView(LoginRequiredMixin, ListView):
+    login_url = 'login'
+    modelo = Ordenes
+    template_name = 'ordenes/ordenes.html'
     
+    def get_queryset(self):
+        return Ordenes.objects.filter(usuario = self.request.user).order_by('-id')
+
