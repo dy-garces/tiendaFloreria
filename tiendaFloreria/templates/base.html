@@ -55,9 +55,16 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'quienesSomos'%}">Quienes Somos</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href=" # ">Agregar Producto</a>
-                        </li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'direccion_envio:direccion_envio'%}">Direcciones</a>
+                            </li>
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href=" # ">Agregar Producto</a>
+                            </li>
+                        {% endif %}
                     </ul>
                     <div class="d-flex m-1">
                         <a href="{% url 'carrito:carrito'%}" class="text-light">
@@ -93,11 +100,7 @@
                 </div>
             </div>
         </nav>
-        <div class="container">
-
-           
-
-        </div>
+        {% include 'messages.html' %}
     </header>
 
 {% block contenido %}

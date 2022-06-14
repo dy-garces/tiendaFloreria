@@ -33,9 +33,12 @@ urlpatterns = [
     path('jardineria/',views.jardineria,name="jardineria"),
     path('productos/',include('productos.urls')),
     path('carrito/',include('carrito.urls')),
+    path('direcciones/',include('direccion_envio.urls')),
+    
     path('orden/',include('ordenes.urls')),
     path('quienesSomos/',views.quienesSomos,name="quienesSomos"),
     path('contacto/',views.contacto,name="contacto"),
+   
     
 ]
 if settings.DEBUG:

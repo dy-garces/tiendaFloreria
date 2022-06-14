@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block contenido %}
+
+<div class="container ">
+    <div class="row p-3 m-3 border shadow">
+        <div class="col-12">
+            <h3>Editar Direccion</h3>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form | crispy }}
+               
+                <div class="d-flex justify-content-end">
+                    <input type="submit" value="Actualizar" class="btn btn-success mt-3">
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}
