@@ -104,6 +104,6 @@ def confirmacion(request):
     return render(request, 'ordenes/confirmacion.html',{
         'carrito':carrito,
         'orden' :orden ,
-        'breadcrumb' : breadcrumb(direccion=True)
+        'breadcrumb' : breadcrumb(direccion=True, confirmacion=True)
     })
         
