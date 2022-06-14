@@ -13,8 +13,7 @@ class DireccionEnvio(models.Model):
     
     
     def __str__(self):
-        return self.envio1
-    
+        return '{} {} {}'.format(self.envio1 ,self.ciudad, self.region )
     @property
     def direcciones(self):
         return '{}-{}'.format(self.ciudad, self.region)
