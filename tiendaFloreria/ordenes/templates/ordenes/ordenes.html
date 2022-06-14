@@ -16,7 +16,20 @@
                     <p class="card-text m-1"> Creacion: {{ orden.creacion}} </p>
                     <p class="card-text m-1"> Total: ${{ orden.total | intcomma}} </p>
                     <div class="d-flex justify-content-end">
-                        <a href="#" class=" btn btn-success"> Ver Detalle</a>
+                        <a href="{% url 'ordenes:detalleCompra'  orden.carrito_id%}" class="btn btn-success" role="button"> Ver Detalle</a>
+                    </div>
+              </div>
+            </div>
+            {% endif %}
+            {% if orden.status == 'OrdenesStatus.CANCELADO' %}
+            <div class="card border rounded shadow">
+              <div class="card-body">
+                    <h4 class="card-title"> Numero de Orden:  #{{ orden.id}}</h4>
+                    <p class="card-text m-1">Estado:  Cancelado </p>
+                    <p class="card-text m-1"> Creacion: {{ orden.creacion}} </p>
+                    <p class="card-text m-1"> Total: ${{ orden.total | intcomma}} </p>
+                    <div class="d-flex justify-content-end">
+                        <a href="{% url 'ordenes:detalleCompra'  orden.carrito_id%}" class="btn btn-success" role="button"> Ver Detalle</a>
                     </div>
               </div>
             </div>
