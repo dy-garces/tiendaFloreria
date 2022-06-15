@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -67,9 +66,14 @@
                         {% endif %}
                         {% if user.is_authenticated %}
                             <li class="nav-item">
-                                <a class="nav-link" href=" # ">Agregar Producto</a>
+                                <a class="nav-link" href=" {% url 'productos:formProducto' %}">Agregar Producto</a>
                             </li>
                         {% endif %}
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href=" {% url 'productos:productoListado' %}">Listado Producto</a>
+                        </li>
+                    {% endif %}
                     </ul>
                     <div class="d-flex m-1">
                         <a href="{% url 'carrito:carrito'%}" class="text-light">

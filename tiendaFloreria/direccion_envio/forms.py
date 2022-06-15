@@ -6,5 +6,5 @@ class DireccionEnvioForms(ModelForm):
         model = DireccionEnvio
         fields = [ 'envio1'  , 'ciudad' , 'region']
         labels = {
-            'envio1': 'Direccion 1',
+            'envio1': 'Direccion',
         }

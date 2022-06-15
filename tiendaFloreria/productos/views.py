@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from productos.models import Producto
-from django.db.models import Q
-
+from .forms import FormularioProducto
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 class PrductoListaView(ListView):
@@ -42,3 +44,25 @@ class ProductoBuscarListView(ListView):
         context['count'] = context['producto_list'].count()
 
         return context  
+
+@login_required(login_url='login')
+def formProducto(request):
+    form = FormularioProducto(request.POST or None)
+    if request.method == 'POST' :
+        form = FormularioProducto(data = request.POST, files=request.FILES)
+        if form.is_valid():
+            producto = form.save(commit=False)
+            producto.usuario = request.user
+            producto.save()
+            messages.success(request, 'Producto creado exitosamente')
+            return redirect('home')
+    
+    return render(request,'productos/formProducto.html',{'form': form})
+
+class productoListado(LoginRequiredMixin, ListView):
+    login_url = 'login'
+    modelo = Producto
+    template_name = 'productos/productoListado.html'
+    
+    def get_queryset(self):
+        return Producto.objects.filter(usuario = self.request.user).order_by('-id')

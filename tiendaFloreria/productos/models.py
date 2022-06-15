@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.db.models.signals import pre_save
+from django.contrib.auth.models import User
 import uuid
 
 # Create your models here.
@@ -11,6 +12,7 @@ class Categoria(models.Model):
         return self.nombre
 
 class Producto(models.Model):
+    usuario = models.ForeignKey(User, null=False, blank=False, on_delete=models.PROTECT)
     nombre =  models.CharField(max_length=50)
     imagen = models.ImageField(upload_to="productos",null=False, blank=False)
     descripcion = models.TextField()

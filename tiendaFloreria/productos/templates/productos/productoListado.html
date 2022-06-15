@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block contenido %}
+<section>
+    <div class="p-5 bg-light">
+        <div class="container">
+            <h1 class="display-3 text-center bg-light">Mis Productos</h1>
+        </div>
+        <div class="container">
+            {% for producto in object_list %}
+            <div class="card border rounded shadow">
+                
+              <div class="card-body">
+                <div class="d-inline-block">
+                    {% if producto.imagen %}
+                    <img src="{{ producto.imagen.url }}" alt="imagen del producto" class="img-fluid" width="200" height="200">
+                    {% endif %}
+                </div>
+               <div class="d-inline-block">
+                    <h4 class="card-title"> Codigo Producto:  #{{ producto.id}}</h4>
+                    <p class="card-text m-1">Nombre:  #{{producto.nombre}} </p>
+                    <p class="card-text m-1"> Creacion: {{ producto.creacion}} </p>
+                    <p class="card-text m-1"> Total: ${{ producto.categoria}} </p>
+                    <p class="card-text m-1"> Total: ${{ producto.precio | intcomma}} </p>
+               </div>
+              </div>
+            </div>
+            {% endfor %}
+            <div class="d-flex justify-content-end">
+                <a href="{% url 'home'  %}" class="btn btn-success" role="button"> Inicio</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock contenido %}
