@@ -30,10 +30,23 @@ class Ordenes(models.Model):
     def cancelar(self):
         self.status = OrdenesStatus.CANCELADO
         self.save()
+        
+    def empaquetado(self):
+        self.status = OrdenesStatus.EMPAQUETADO
+        self.save()
+        
+    def despachado(self):
+        self.status = OrdenesStatus.DESPACHADO
+        self.save()
+    
+    def entregado(self):
+        self.status = OrdenesStatus.ENTREGADO
+        self.save()
     
     def completar(self):
         self.status = OrdenesStatus.COMPLETADO
         self.save()
+    
     
 def set_orden_id(sender, instance, *args, **kwargs):
     if not instance.orden_id:

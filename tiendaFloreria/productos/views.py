@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render, resolve_url
 from django.views.generic import ListView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from productos.models import Producto
+from django.urls import reverse_lazy
 from .forms import FormularioProducto
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -68,7 +69,6 @@ class productoListado(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Producto.objects.filter(usuario = self.request.user).order_by('-id')
     
-    
 class ProductoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     login_url = 'login'
     model = Producto
@@ -78,5 +78,18 @@ class ProductoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     def get_success_url(self):
         return resolve_url('productos:productoListado')
     
+    def dispatch(self, request, *args, **kwargs):
+        print( self.get_object().usuario)
+        print(request.user)
+        if request.user != self.get_object().usuario:
+            return redirect('home')
+        return super(ProductoUpdateView, self).dispatch(request, *args, **kwargs)
+            
+class ProductoDeleteView(LoginRequiredMixin, DeleteView, SuccessMessageMixin):
+    login_url = 'login'
+    model = Producto
+    template_name = 'productos/borrar.html'
+    success_url = reverse_lazy('productos:productoListado')
+    success_message = 'Producto eliminado exitosamente'
 
       

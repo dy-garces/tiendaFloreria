@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from usuarios.views import cambiarpassword, modificarusuario, perfil, perfilusuario, registro
 from productos.views import PrductoListaView
 from . import views
 from django.conf import settings
@@ -34,10 +34,14 @@ urlpatterns = [
     path('productos/',include('productos.urls')),
     path('carrito/',include('carrito.urls')),
     path('direcciones/',include('direccion_envio.urls')),
-    
     path('orden/',include('ordenes.urls')),
     path('quienesSomos/',views.quienesSomos,name="quienesSomos"),
     path('contacto/',views.contacto,name="contacto"),
+    path('perfilusuario/',perfilusuario,name="perfilusuario"),
+    path('registro',registro, name="registro"),
+    path('perfil',perfil, name="perfil"),
+    path('modificarusuario/<id>',modificarusuario, name="modificarusuario"),
+    path('cambiarpassword',cambiarpassword, name="cambiarpassword"),
    
     
 ]

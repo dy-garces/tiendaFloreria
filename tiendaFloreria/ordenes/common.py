@@ -7,5 +7,6 @@ class OrdenesStatus(Enum):
     CANCELADO = 'CANCELADO'
     EMPAQUETADO = 'EMPAQUETADO'
     DESPACHADO = 'DESPACHADO'
+    ENTREGADO = 'ENTREGADO'
     
 choices = [( tag, tag.value) for  tag in OrdenesStatus]

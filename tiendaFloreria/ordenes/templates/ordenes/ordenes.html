@@ -4,38 +4,30 @@
 <section>
     <div class="p-5 bg-light">
         <div class="container">
-            <h1 class="display-3 text-center bg-light">Mis Pedidos</h1>
+            <h1 class="display-3 text-center bg-light">Mis Pedidos</h1>x
         </div>
         <div class="container">
             {% for orden in object_list %}
-            {% if orden.status == 'OrdenesStatus.COMPLETADO' %}
             <div class="card border rounded shadow">
-              <div class="card-body">
-                    <h4 class="card-title"> Numero de Orden:  #{{ orden.id}}</h4>
-                    <p class="card-text m-1">Estado:  Completado </p>
+                <div class="card-body">
+                    <h4 class="card-title"> Numero de Orden: #{{ orden.id}}</h4>
+                    <p class="card-text m-1">Estado: Completado </p>
                     <p class="card-text m-1"> Creacion: {{ orden.creacion}} </p>
                     <p class="card-text m-1"> Total: ${{ orden.total | intcomma}} </p>
                     <div class="d-flex justify-content-end">
+                        {% if request.user.username == 'waco' %}
+                        <div class="d-flex justify-content-end">
+                            <a href="#"class="btn btn-success me-3">Empaquetado</a>
+                            <a href="#" class="btn btn-success me-3">Enviado</a>
+                            <a href="#" class="btn btn-success me-3">Entregado</a>
+                        </div>
+                        {% endif %}
                         <a href="{% url 'ordenes:detalleCompra'  orden.carrito_id%}" class="btn btn-success" role="button"> Ver Detalle</a>
                     </div>
-              </div>
+                </div>
             </div>
-            {% endif %}
-            {% if orden.status == 'OrdenesStatus.CANCELADO' %}
-            <div class="card border rounded shadow">
-              <div class="card-body">
-                    <h4 class="card-title"> Numero de Orden:  #{{ orden.id}}</h4>
-                    <p class="card-text m-1">Estado:  Cancelado </p>
-                    <p class="card-text m-1"> Creacion: {{ orden.creacion}} </p>
-                    <p class="card-text m-1"> Total: ${{ orden.total | intcomma}} </p>
-                    <div class="d-flex justify-content-end">
-                        <a href="{% url 'ordenes:detalleCompra'  orden.carrito_id%}" class="btn btn-success" role="button"> Ver Detalle</a>
-                    </div>
-              </div>
-            </div>
-            {% endif %}
             {% endfor %}
-            
+
         </div>
 
     </div>

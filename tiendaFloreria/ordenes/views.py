@@ -207,9 +207,10 @@ def detalleCompra(request, carrito_id):
 
 @login_required(login_url='login')   
 def seguimientoCompra(request,id):
-    
+
     orden = Ordenes.objects.filter(id = id).first()
     
     return render(request, 'ordenes/seguimientoCompra.html',{
         'orden' : orden
     })
+    

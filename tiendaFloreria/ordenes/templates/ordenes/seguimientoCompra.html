@@ -14,8 +14,10 @@
       <div class="card-body">
         <p>Numero de orden: {{ orden.id }}</p>
         {% if orden.status == 'OrdenesStatus.COMPLETADO' %}
-      
         <p>Pedido Completado</p>
+        <input type="range" class="form-range" min="0" max="0" id="customRange2">
+        {% elif  orden.status == 'OrdenesStatus.CANCELADO' %}
+        <p>Pedido Cancelado</p>
         <input type="range" class="form-range" min="0" max="0" id="customRange2">
         {% endif %}
         

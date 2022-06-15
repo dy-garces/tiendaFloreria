@@ -24,11 +24,10 @@
                     <p class="card-text m-1"> Total: ${{ producto.precio | intcomma}} </p>
                </div>
                <div class="d-flex justify-content-end">
-                <a href="#" class="btn btn-danger me-3">Eliminar</a>
+                <a href="{% url 'productos:borrar' producto.pk %} " class="btn btn-danger me-3">Eliminar</a>
                     <a href="{% url 'productos:update' producto.pk %}" class="btn btn-success">Actualizar</a>
                </div>
-
-              </div>
+                </div>
             </div>
             {% endfor %}
             <div class="d-flex justify-content-end mt-3">

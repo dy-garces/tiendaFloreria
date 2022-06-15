@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block contenido %}
+    <div class="container mt-5">
+        {% for p in perfil %}
+            {% if user.username == p.nombre_usuario %}
+            <div class="row">
+                <div class="col-sm-4">
+                    <h2 class="text-center">{{p.nombre}} {{p.apellido}}</h2>
+                    <div class="card">
+                        <div class="card-body">
+                            <div>
+                                    <img src="{{p.imgen.url}} " alt="imagen" class="img-fluid m-3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="container">
+                        <h2>NOMBRE DE USUARIO : {{ p.nombre_usuario }}</h2>
+                        <br>
+                        <h5>Correo Electronico: {{ p.correo }}</h5>
+                        <br>
+                        <h5>Numero de Contacto: +56{{ p.numero }}</h5>
+                        <br>
+                        {% if p.vendedor == 0 %}
+                            <h5>Tipo de usuario: Cliente</h5>
+                        {% endif %}
+                        {% if p.vendedor == 1 %}
+                            <h5>Tipo de usuario: Vendedor</h5>
+                        {% endif %}
+                        <hr>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="container">
+                    <div class="border-2 border p-3 m-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="container">
+                                    <div class="row">
+                                        <h5 style="text-align: center;">Usuario</h5>
+                                        <p style="text-align: center;">Administracion de usuario</p>
+                                        <button type="button" class="btn btn-success text-light mb-3"><a href="{% url 'modificarusuario' p.nombre_usuario %}" 
+                                            class="nav-link text-light">Editar Informacion</a>
+                                        </button>
+                                        <button type="button" class="btn btn-success text-light mb-3"><a
+                                            class="nav-link text-light" href="pagarSubscripcion.html">Subscribirse</a>
+                                        </button>
+                                        <button type="button" class="btn btn-success text-light mb-3"><a href="{% url 'cambiarpassword'%}" 
+                                            class="nav-link text-light">Cambiar contraseña</a>
+                                        </button>
+                                        <button type="button" class="btn btn-success text-light mb-3" style="float:right ;"><a
+                                            class="nav-link text-light" href="{% url 'logout' %}">Cerrar Sesion</a>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <h5 style="text-align: center;">Compras Realizadas</h5>
+                                <p style="text-align: center;">Administracion de compras</p>
+                                <div class="container">
+                                    <div class="row">
+                                        <button type="button" class="btn btn-success text-light mb-3" style="float:left;"><a
+                                            class="nav-link text-light" href="historial_compras.html">Historial de
+                                            compras</a> </button>
+                                        <button type="button" class="btn btn-success text-light mb-3" style="float:right;"><a
+                                            class="nav-link text-light" href="pedidos.html">Pedidos</a>
+                                        </button>
+                                        <button type="button" class="btn btn-success text-light mb-3" style="float:left;"><a
+                                            class="nav-link text-light" href="seguimiento_compra.html">Seguimiento de
+                                            compras</a>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% if user.is_staff == 1  %}
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-body">
+                
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h2 class="text-center">ADMIN</h2>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div>
+                                            <img src="{% static 'img/vendedor.webp' %}" alt="imagen" class="img-fluid">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>    
+                            <div class="col-sm-8">
+                                <div class="container">
+                                    <h2>NOMBRE DE USUARIO : {{ user.username }}</h2>
+                                    <br>
+                                    <h5>Tipo de usuario: Administrador</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="container">
+                                <div class="border-2 border p-3 m-3">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <h5 style="text-align: center;">Usuario</h5>
+                                                    <p style="text-align: center;">Administracion de usuario</p>
+                                                    <button type="button" class="btn btn-success text-light mb-3"><a href="#" 
+                                                        class="nav-link text-light">Editar Informacion</a>
+                                                    </button>
+                                                    <button type="button" class="btn btn-success text-light mb-3"><a
+                                                        class="nav-link text-light" href="pagarSubscripcion.html">Subscribirse</a>
+                                                    </button>
+                                                    <button type="button" class="btn btn-success text-light mb-3"><a href="{% url 'cambiarpassword'%}" 
+                                                        class="nav-link text-light">Cambiar contraseña</a>
+                                                    </button>
+                                                    <button type="button" class="btn btn-success text-light mb-3" style="float:right ;"><a
+                                                        class="nav-link text-light" href="{% url 'logout' %}">Cerrar Sesion</a>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <h5 style="text-align: center;">Compras Realizadas</h5>
+                                            <p style="text-align: center;">Administracion de compras</p>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <button type="button" class="btn btn-success text-light mb-3" style="float:left;"><a
+                                                        class="nav-link text-light" href="historial_compras.html">Historial de
+                                                        compras</a> </button>
+                                                    <button type="button" class="btn btn-success text-light mb-3" style="float:right;"><a
+                                                        class="nav-link text-light" href="pedidos.html">Pedidos</a>
+                                                    </button>
+                                                    <button type="button" class="btn btn-success text-light mb-3" style="float:left;"><a
+                                                        class="nav-link text-light" href="seguimiento_compra.html">Seguimiento de
+                                                        compras</a>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>        
+            </div>        
+        </div>
+    {% endif %}
+    <br>
+{% endblock contenido %}

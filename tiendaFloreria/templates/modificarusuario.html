@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block contenido %}
+
+<div class="container">
+    <script>
+        $(document).ready(function () {
+            $('#nombre_usuario').attr("readonly", True)
+        });
+    </script>
+    <br>
+    <div class="col-12 col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="text-center">MODIFICAR FICHA</h4>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ frm|crispy }}
+
+                    <div class="col-12 col-md-2 offset-md-5">
+                        <input type="submit" value="Guardar" class="btn btn-success">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+
+
+{% endblock contenido %}
