@@ -8,4 +8,5 @@ urlpatterns = [
     path('<slug:slug>', views.ProductoDetalleView.as_view(),name='producto'),
     path('formProducto/',views.formProducto,name='formProducto'),
     path('productoListado/', views.productoListado.as_view(), name='productoListado'),
+    path('update/<int:pk>',views.ProductoUpdateView.as_view(),name='update'),
 ]

@@ -1,11 +1,12 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
-from django.views.generic.list import ListView
+from django.shortcuts import redirect, render, resolve_url
+from django.views.generic import ListView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from productos.models import Producto
 from .forms import FormularioProducto
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views  import SuccessMessageMixin
 # Create your views here.
 
 class PrductoListaView(ListView):
@@ -66,3 +67,16 @@ class productoListado(LoginRequiredMixin, ListView):
     
     def get_queryset(self):
         return Producto.objects.filter(usuario = self.request.user).order_by('-id')
+    
+    
+class ProductoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    login_url = 'login'
+    model = Producto
+    form_class = FormularioProducto
+    template_name = 'productos/update.html'
+    
+    def get_success_url(self):
+        return resolve_url('productos:productoListado')
+    
+
+      
