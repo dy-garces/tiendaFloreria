@@ -1,8 +1,7 @@
 
-from django.shortcuts import get_list_or_404, get_object_or_404, redirect, render
-from ordenes.common import OrdenesStatus
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import Ordenes
-from carrito.models import Carrito, CarritoProductos
+from carrito.models import Carrito
 from django.contrib.auth.decorators import login_required
 from .utilis import breadcrumb, destruir_orden
 from direccion_envio.models import DireccionEnvio
@@ -195,9 +194,9 @@ class OrdenesListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Ordenes.objects.filter(usuario = self.request.user).order_by('-id')
 
+@login_required(login_url='login') 
 def detalleCompra(request, carrito_id):
-    
-    
+
     carrito_id = get_object_or_404(Carrito, id=carrito_id)
     orden = Ordenes.objects.filter(carrito = carrito_id).first()
     
@@ -205,3 +204,12 @@ def detalleCompra(request, carrito_id):
         'carrito' : carrito_id,
         'orden' : orden
         })
+
+@login_required(login_url='login')   
+def seguimientoCompra(request,id):
+    
+    orden = Ordenes.objects.filter(id = id).first()
+    
+    return render(request, 'ordenes/seguimientoCompra.html',{
+        'orden' : orden
+    })

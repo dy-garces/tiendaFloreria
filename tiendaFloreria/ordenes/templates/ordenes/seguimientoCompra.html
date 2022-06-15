@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block contenido %}
+
+<section>
+    <div class="p-5 bg-light">
+        <div class="container">
+            <h1 class="display-3 text-center bg-light">Seguimiento de compra</h1>
+        </div>
+    </div>
+</section>
+
+<div class="container mb-5 mt-5">
+    <div class="card ">
+      <div class="card-body">
+        <p>Numero de orden: {{ orden.id }}</p>
+        {% if orden.status == 'OrdenesStatus.COMPLETADO' %}
+      
+        <p>Pedido Completado</p>
+        <input type="range" class="form-range" min="0" max="0" id="customRange2">
+        {% endif %}
+        
+      </div>
+    </div>
+    
+</div>
+
+
+{% endblock contenido %}
