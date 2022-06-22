@@ -11,7 +11,9 @@
                     <div class="card">
                         <div class="card-body">
                             <div>
-                                    <img src="{{p.imgen.url}} " alt="imagen" class="img-fluid m-3">
+                                {% if p.imagen %}
+                                <img src="{{ p.imagen.url }} " alt="imagen" class="img-fluid m-3">
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -47,9 +49,13 @@
                                         <button type="button" class="btn btn-success text-light mb-3"><a href="{% url 'modificarusuario' p.nombre_usuario %}" 
                                             class="nav-link text-light">Editar Informacion</a>
                                         </button>
+                                        {% if p.suscrito == 0 %}
                                         <button type="button" class="btn btn-success text-light mb-3"><a
                                             class="nav-link text-light" href="pagarSubscripcion.html">Subscribirse</a>
                                         </button>
+                                        {% else %}
+                                      
+                                        {% endif %} 
                                         <button type="button" class="btn btn-success text-light mb-3"><a href="{% url 'cambiarpassword'%}" 
                                             class="nav-link text-light">Cambiar contraseña</a>
                                         </button>

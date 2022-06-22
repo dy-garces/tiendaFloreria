@@ -36,7 +36,6 @@ def perfilusuario(request):
             perfil.rut=datos.get("rut")
             perfil.nombre=datos.get("nombre")
             perfil.apellido=datos.get("apellido")
-            perfil.direccion=datos.get("direccion")
             perfil.fecha_nac=datos.get("fecha_nac")
             perfil.correo=datos.get("correo")
             perfil.numero=datos.get("numero")

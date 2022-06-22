@@ -8,6 +8,7 @@ from .forms import FormularioProducto
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views  import SuccessMessageMixin
+
 # Create your views here.
 
 class PrductoListaView(ListView):
@@ -92,4 +93,3 @@ class ProductoDeleteView(LoginRequiredMixin, DeleteView, SuccessMessageMixin):
     success_url = reverse_lazy('productos:productoListado')
     success_message = 'Producto eliminado exitosamente'
 
-      

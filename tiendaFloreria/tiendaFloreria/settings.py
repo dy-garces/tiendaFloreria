@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'usuarios',
     'ordenes',
     'direccion_envio',
+    'rest_framework',
     
 ]
 

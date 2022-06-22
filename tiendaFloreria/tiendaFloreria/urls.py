@@ -21,11 +21,16 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+from .views import productosViewSet
+from rest_framework import  routers
+
+router = routers.DefaultRouter()
+router.register("productos",productosViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',PrductoListaView.as_view(),name="home"),
     path('accounts/',include('django.contrib.auth.urls')),
-    path('registro',views.registro, name="registro"),
     path('flores/',views.flores,name="flores"),
     path('plantas/',views.plantas,name="plantas"),
     path('arboles/',views.arboles,name="arboles"),
@@ -42,8 +47,7 @@ urlpatterns = [
     path('perfil',perfil, name="perfil"),
     path('modificarusuario/<id>',modificarusuario, name="modificarusuario"),
     path('cambiarpassword',cambiarpassword, name="cambiarpassword"),
-   
-    
+    path('api/',include(router.urls))
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
