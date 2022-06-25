@@ -102,6 +102,12 @@
         <h4 class=" text-center mt-3 mb-5">Completado</h4>
         {% elif orden.status == 'OrdenesStatus.CANCELADO'%}
         <h4 class=" text-center mt-3 mb-5">Cancelado</h4>
+        {% elif orden.status == 'OrdenesStatus.EMPAQUETADO'%}
+        <h4 class=" text-center mt-3 mb-5">Empaquetado</h4>
+        {% elif orden.status == 'OrdenesStatus.DESPACHADO'%}
+        <h4 class=" text-center mt-3 mb-5">Despachado</h4>
+        {% elif orden.status == 'OrdenesStatus.ENTREGADO'%}
+        <h4 class=" text-center mt-3 mb-5">Entregado</h4>
         {% endif %}
         <div>
             <a href="{% url 'home' %}" class="btn btn-success m-3 ">Inicio</a>

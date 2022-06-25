@@ -11,18 +11,18 @@
             <div class="card border rounded shadow">
                 <div class="card-body">
                     <h4 class="card-title"> Numero de Orden: #{{ orden.id}}</h4>
-                    <p class="card-text m-1">Estado: Completado </p>
+                    <p class="card-text m-1">Estado: {{orden.status}} </p>
                     <p class="card-text m-1"> Creacion: {{ orden.creacion}} </p>
                     <p class="card-text m-1"> Total: ${{ orden.total | intcomma}} </p>
                     <div class="d-flex justify-content-end">
                         {% if request.user.username == 'waco' %}
                         <div class="d-flex justify-content-end">
-                            <a href="#"class="btn btn-success me-3">Empaquetado</a>
-                            <a href="#" class="btn btn-success me-3">Enviado</a>
-                            <a href="#" class="btn btn-success me-3">Entregado</a>
+                            <a href="{% url 'ordenes:empaquetado'  orden.id %}"class="btn btn-success me-3">Empaquetado</a>
+                            <a href="{% url 'ordenes:despachado'  orden.id %}" class="btn btn-success me-3">Enviado</a>
+                            <a href="{% url 'ordenes:entregado'  orden.id %}" class="btn btn-success me-3">Entregado</a>
                         </div>
                         {% endif %}
-                        <a href="{% url 'ordenes:detalleCompra'  orden.carrito_id%}" class="btn btn-success" role="button"> Ver Detalle</a>
+                        <a href="{% url 'ordenes:detalleCompra'  orden.carrito_id %}" class="btn btn-success" role="button"> Ver Detalle</a>
                     </div>
                 </div>
             </div>

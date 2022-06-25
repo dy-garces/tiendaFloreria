@@ -214,3 +214,33 @@ def seguimientoCompra(request,id):
         'orden' : orden
     })
     
+def empaquetado(request,id):
+    orden = Ordenes.objects.filter(id=id).first()
+    orden.status = orden.empaquetado()
+    
+    destruir_carrito(request)
+    destruir_orden(request)
+    
+    messages.success(request, 'Empaquetado Completado exitosamente')
+    return redirect('home') 
+
+def despachado(request,id):
+    orden = Ordenes.objects.filter(id=id).first()
+    orden.status = orden.despachado()
+    
+    destruir_carrito(request)
+    destruir_orden(request)
+    
+    messages.success(request, 'Empaquetado Completado exitosamente')
+    return redirect('home')  
+
+
+def entregado(request,id):
+    orden = Ordenes.objects.filter(id=id).first()
+    orden.status = orden.entregado()
+    
+    destruir_carrito(request)
+    destruir_orden(request)
+    
+    messages.success(request, 'Empaquetado Completado exitosamente')
+    return redirect('home')  

@@ -15,10 +15,29 @@
         <p>Numero de orden: {{ orden.id }}</p>
         {% if orden.status == 'OrdenesStatus.COMPLETADO' %}
         <p>Pedido Completado</p>
-        <input type="range" class="form-range" min="0" max="0" id="customRange2">
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
         {% elif  orden.status == 'OrdenesStatus.CANCELADO' %}
         <p>Pedido Cancelado</p>
-        <input type="range" class="form-range" min="0" max="0" id="customRange2">
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        {% elif  orden.status == 'OrdenesStatus.EMPAQUETADO' %}
+        <p>Pedido empaquetado</p>
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 50%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        {% elif  orden.status == 'OrdenesStatus.DESPACHADO' %}
+        <p>Pedido Despachado</p>
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 75%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        {% elif  orden.status == 'OrdenesStatus.ENTREGADO' %}
+        <p>Pedido entregado</p>
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 100%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
         {% endif %}
         
       </div>

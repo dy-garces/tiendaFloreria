@@ -12,8 +12,10 @@ urlpatterns = [
     path('completar', views.completar, name='completar'),
     path('completados', views.OrdenesListView.as_view(), name='completados'),
     path('detalleCompra/<int:carrito_id>',views.detalleCompra, name="detalleCompra"),
-    path('seguimientoCompra/<categoria>',views.seguimientoCompra , name='seguimientoCompra'),
-    
+    path('seguimientoCompra/<int:id>',views.seguimientoCompra , name='seguimientoCompra'),
+    path('empaquetado/<int:id>',views.empaquetado , name='empaquetado'),
+    path('despachado/<int:id>',views.despachado , name='despachado'),
+    path('entregado/<int:id>',views.entregado , name='entregado'),
 ]
 
 
