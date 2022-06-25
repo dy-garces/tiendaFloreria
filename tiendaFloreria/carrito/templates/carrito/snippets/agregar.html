@@ -15,7 +15,25 @@
     const agregar = document.getElementById('agregar')
     const restar = document.getElementById('restar')
     const cantidad = document.getElementById('cantidad')
+  
+    $(document).ready(function(){
+      $("#agregar").click(function(){
+        let stock = parseInt($('#stock').html());
+        let cantidad = parseInt($('#cantidad').val())
+        stock = stock - cantidad
+        if( stock <= 0){
+          $("#agregar").prop("disabled", true);
+          alert('Se alcanzado el limite de stock')
+        }
+      });
+    });
 
+    $(document).ready(function(){
+      $("#restar").click(function(){
+        $("#agregar").prop("disabled", false);
+      });
+    });
+    
     agregar.addEventListener('click' , function() {
       cantidad.value = parseInt(cantidad.value) + 1
     })

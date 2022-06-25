@@ -3,6 +3,8 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from productos.models import Producto
 from django.db.models.signals import pre_save,m2m_changed, post_save
 from django.contrib import messages
@@ -57,13 +59,10 @@ class CarritoProductos(models.Model):
     def actualizar_cantidad(self, cantidad = 1 ):
         self.cantidad = cantidad
         self.producto.stock =  self.producto.stock - cantidad
-        self.producto.stock > 0 
         self.producto.save()
         self.save()
-       
+
         
-        
-    
 def set_carrito_id(sender, instance, *args, **kwargs):
     if not instance.carrito_id:
         instance.carrito_id = str(uuid.uuid4())

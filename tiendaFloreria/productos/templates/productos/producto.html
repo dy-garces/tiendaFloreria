@@ -23,16 +23,19 @@
             <div class="col-sm-8">
               <h2 class="m-3">Nombre: {{ producto.nombre | title}}</h2>
               <br>
-              <h3 class="m-3">Stock: {{producto.stock | intcomma}}</h3>
+              <h3 class="d-inline"> Stock:  </h3>  <h3 class="m-3 d-inline" id="stock" >{{producto.stock}}</h3>
               <br>
               <h3 class="m-3">Precio: ${{producto.precio | intcomma}}</h3>
               <br>
               <p class="m-3">{{producto.descripcion}}</p>
+
+              {% if producto.stock > 0  %}
                 <div class="d-flex justify-content-end">
                   <div>
                     {% include 'carrito/snippets/agregar.html' %}
                   </div>
                 </div>
+              {% endif %}
               </div>
           </div>
         </div>
