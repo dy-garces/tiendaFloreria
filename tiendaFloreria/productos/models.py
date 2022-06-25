@@ -16,10 +16,12 @@ class Producto(models.Model):
     nombre =  models.CharField(max_length=50)
     imagen = models.ImageField(upload_to="productos",null=False, blank=False)
     descripcion = models.TextField()
-    precio = models.IntegerField(default=0)
+    precio = models.IntegerField(default=0,null=False , blank=False)
     slug = models.SlugField(null=False, blank=False , unique=True)
     creacion = models.DateTimeField(auto_now_add=True)
+    stock = models.IntegerField(null=False , blank=False, default=0)
     categoria =  models.ForeignKey(Categoria, on_delete=models.PROTECT)
+    
     
     def __str__(self):
         return self.nombre

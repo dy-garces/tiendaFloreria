@@ -30,5 +30,5 @@ class PerfilUsuario(models.Model):
     suscrito=models.BooleanField(default=False)
     
     def __str__(self):
-        return self.nombre + " "+self.apellido
+        return self.nombre + " " + self.apellido
 
