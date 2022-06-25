@@ -59,7 +59,6 @@ def producto(request):
     
     return render(request,"producto.html")
 
-
 class productosViewSet(viewsets.ModelViewSet):
     queryset = Producto.objects.all()
     serializer_class = Producto_srlz
