@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, resolve_url
 from django.views.generic import ListView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
-from productos.models import Producto
+from productos.models import Categoria, Producto
 from django.urls import reverse_lazy
 from .forms import FormularioProducto, FormularioCategoria
 from django.contrib import messages
@@ -104,3 +104,23 @@ def formCategoria(request):
             return redirect('home')
     
     return render(request,'productos/formCategoria.html',{'form': form})
+
+def listadoCategoria(request):
+    categoria = Categoria.objects.all()
+    return render(request, 'productos/listadoCategoria.html', { 'categoria':categoria })
+
+class CategoriaUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    login_url = 'login'
+    model = Categoria
+    form_class = FormularioCategoria
+    template_name = 'productos/updateCategoria.html'
+    
+    def get_success_url(self):
+        return resolve_url('productos:listadoCategoria')
+
+class CategoriaDeleteView(LoginRequiredMixin, DeleteView, SuccessMessageMixin):
+    login_url = 'login'
+    model = Categoria
+    template_name = 'productos/borrarCategoria.html'
+    success_url = reverse_lazy('productos:listadoCategoria')
+    success_message = 'Categoria eliminado exitosamente'
