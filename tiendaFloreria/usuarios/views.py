@@ -2,9 +2,9 @@ from django.shortcuts import get_object_or_404, redirect, render, resolve_url
 from django.contrib.auth.forms import UserCreationForm,PasswordChangeForm
 from django.urls import reverse_lazy
 from tiendaFloreria.forms import frmPerfilUsuario
-from usuarios.models import PerfilUsuario, Region
+from usuarios.models import Comuna, PerfilUsuario, Region
 from django.contrib.auth import authenticate,login
-from usuarios.forms import FormularioRegion
+from usuarios.forms import FormularioRegion, FormularioComuna
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views  import SuccessMessageMixin
@@ -110,15 +110,12 @@ def formRegion(request):
     if request.method == 'POST' :
         form = FormularioRegion(data = request.POST, files=request.FILES)
         if form.is_valid():
-            categoria = form.save(commit=False)
-            categoria.save()
+            region = form.save(commit=False)
+            region.save()
             messages.success(request, 'region creada exitosamente')
             return redirect('home')
     
     return render(request,'registration/formRegion.html',{'form': form})
-
-
-
 
 def listadoRegion(request):
     region = Region.objects.all()
@@ -139,5 +136,37 @@ class RegionDeleteView(LoginRequiredMixin, DeleteView, SuccessMessageMixin):
     template_name = 'registration/borrarRegion.html'
     success_url = reverse_lazy('listadoRegion')
     success_message = 'Region eliminada exitosamente'
+
+def formComuna(request):
+    form = FormularioComuna(request.POST or None)
+    if request.method == 'POST' :
+        form = FormularioComuna(data = request.POST, files=request.FILES)
+        if form.is_valid():
+            comuna = form.save(commit=False)
+            comuna.save()
+            messages.success(request, 'Comuna creada exitosamente')
+            return redirect('home')
+    
+    return render(request,'registration/formComuna.html',{'form': form})
+
+def listadoComuna(request):
+    comuna = Comuna.objects.all()
+    return render(request, 'registration/listadoComuna.html', { 'comuna':comuna })
+
+class ComunaUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    login_url = 'login'
+    model = Comuna
+    form_class = FormularioComuna
+    template_name = 'registration/updateComuna.html'
+    
+    def get_success_url(self):
+        return resolve_url('listadoComuna')
+
+class ComunaDeleteView(LoginRequiredMixin, DeleteView, SuccessMessageMixin):
+    login_url = 'login'
+    model = Comuna
+    template_name = 'registration/borrarComuna.html'
+    success_url = reverse_lazy('listadoComuna')
+    success_message = 'Comuna eliminada exitosamente'
 
 

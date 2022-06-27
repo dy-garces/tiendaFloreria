@@ -8,3 +8,9 @@ class FormularioRegion(forms.ModelForm):
         model = Region
         fields = ["nombre"]
         
+
+class FormularioComuna(forms.ModelForm):
+    class Meta:
+        model = Comuna
+        fields = ["nombre","region"]
+        

@@ -146,6 +146,16 @@
                         <a class="nav-link" href=" {% url 'listadoRegion' %}">Listado de  Regiones</a>
                     </li>
                 {% endif %}
+                {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href=" {% url 'formComuna' %}">Registrar Comuna</a>
+                        </li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href=" {% url 'listadoComuna' %}">Listado de  Comuna</a>
+                    </li>
+                {% endif %}
                         <li class="nav-item">
                     </ul>
                 </div>

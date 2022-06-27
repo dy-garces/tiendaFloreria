@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from usuarios.views import cambiarpassword, modificarusuario, perfil, perfilusuario, registro, formRegion , RegionDeleteView , RegionUpdateView , listadoRegion
+from usuarios.views import cambiarpassword, modificarusuario, perfil, perfilusuario, registro, formRegion , RegionDeleteView , RegionUpdateView , listadoRegion, formComuna , ComunaDeleteView, ComunaUpdateView , listadoComuna
 from productos.views import PrductoListaView
 from . import views
 from django.conf import settings
@@ -47,10 +47,14 @@ urlpatterns = [
     path('modificarusuario/<id>',modificarusuario, name="modificarusuario"),
     path('cambiarpassword',cambiarpassword, name="cambiarpassword"),
     path('formRegion/',formRegion ,name='formRegion'),
-    
     path('listadoRegion/',listadoRegion, name='listadoRegion'),
     path('updateRegion/<int:pk>',RegionUpdateView.as_view(),name='updateRegion'),
     path('borrarRegion/<int:pk>',RegionDeleteView.as_view(),name='borrarRegion'),
+    
+    path('formComuna/',formComuna ,name='formComuna'),
+    path('listadoComuna/',listadoComuna, name='listadoComuna'),
+    path('updateComuna/<int:pk>',ComunaUpdateView.as_view(),name='updateComuna'),
+    path('borrarComuna/<int:pk>',ComunaDeleteView.as_view(),name='borrarComuna'),
     
     
     

@@ -9,7 +9,7 @@ class Region(models.Model):
         return self.nombre
     
 class Comuna(models.Model):
-    nombre = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=50,null=True, blank=False, unique=True)
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
     
     def __str__(self):

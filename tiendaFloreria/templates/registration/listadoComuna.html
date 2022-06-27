@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block contenido %}
+<section>
+    <div class="p-5 bg-light">
+        <div class="container">
+            <h1 class="display-3 text-center bg-light">Comunas</h1>
+        </div>
+        <div class="container">
+            {% for c in comuna %}
+            <div class="card border rounded shadow">
+                
+              <div class="card-body">
+                <h3 class="card-text m-1">Nombre:  {{c.nombre}} </h3>
+                <h3 class="card-text m-1">Nombre de Region que pertenece:  {{c.region}} </h3>
+                    <div class="d-flex justify-content-end">
+                        <a href="{% url 'borrarComuna' c.pk %} " class="btn btn-danger me-3">Eliminar</a>
+                        <a href="{% url 'updateComuna' c.pk %}" class="btn btn-success">Actualizar</a>
+                </div>
+               </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+{% endblock contenido %}
