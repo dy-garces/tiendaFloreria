@@ -63,6 +63,11 @@
                         </li>
                         {% endif %}
                         {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'ordenes:allOrdenes'%}">All Ordenes</a>
+                        </li>
+                        {% endif %}
+                        {% if user.is_authenticated %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'direccion_envio:direccion_envio'%}">Direcciones</a>
                             </li>

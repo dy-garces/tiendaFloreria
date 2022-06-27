@@ -222,7 +222,7 @@ def empaquetado(request,id):
     destruir_orden(request)
     
     messages.success(request, 'Empaquetado Completado exitosamente')
-    return redirect('home') 
+    return redirect('ordenes:allOrdenes') 
 
 def despachado(request,id):
     orden = Ordenes.objects.filter(id=id).first()
@@ -232,8 +232,7 @@ def despachado(request,id):
     destruir_orden(request)
     
     messages.success(request, 'Empaquetado Completado exitosamente')
-    return redirect('home')  
-
+    return redirect('ordenes:allOrdenes')  
 
 def entregado(request,id):
     orden = Ordenes.objects.filter(id=id).first()
@@ -243,4 +242,10 @@ def entregado(request,id):
     destruir_orden(request)
     
     messages.success(request, 'Empaquetado Completado exitosamente')
-    return redirect('home')  
+    return redirect('ordenes:allOrdenes')  
+
+def allOrdenes(request):
+    
+    ordenes = Ordenes.objects.all().order_by('-id')
+    
+    return render(request,'ordenes/allOrdenes.html',{ 'ordenes':ordenes})

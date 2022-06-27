@@ -16,6 +16,7 @@ urlpatterns = [
     path('empaquetado/<int:id>',views.empaquetado , name='empaquetado'),
     path('despachado/<int:id>',views.despachado , name='despachado'),
     path('entregado/<int:id>',views.entregado , name='entregado'),
+    path('allOrdenes', views.allOrdenes , name='allOrdenes'),
 ]
 
 

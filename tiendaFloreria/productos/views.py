@@ -14,8 +14,7 @@ from django.contrib.messages.views  import SuccessMessageMixin
 class PrductoListaView(ListView):
     template_name='home.html'
     queryset = Producto.objects.all().order_by('-id')
-    paginate_by = 9
-    
+        
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs) 
         context['productos'] = context['producto_list']
