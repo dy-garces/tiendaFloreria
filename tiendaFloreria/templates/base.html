@@ -136,6 +136,16 @@
                             <a class="nav-link" href=" {% url 'productos:listadoCategoria' %}">Listado Categoria</a>
                         </li>
                     {% endif %}
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href=" {% url 'formRegion' %}">Registrar Region</a>
+                        </li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href=" {% url 'listadoRegion' %}">Listado de  Regiones</a>
+                    </li>
+                {% endif %}
                         <li class="nav-item">
                     </ul>
                 </div>

@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Region(models.Model):
-    nombre = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=50,null=True, blank=False, unique=True)
     
     def __str__(self):
         return self.nombre
@@ -31,4 +31,6 @@ class PerfilUsuario(models.Model):
     
     def __str__(self):
         return self.nombre + " " + self.apellido
+
+
 

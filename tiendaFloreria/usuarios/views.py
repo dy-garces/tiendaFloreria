@@ -1,8 +1,14 @@
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect, render, resolve_url
 from django.contrib.auth.forms import UserCreationForm,PasswordChangeForm
+from django.urls import reverse_lazy
 from tiendaFloreria.forms import frmPerfilUsuario
-from usuarios.models import PerfilUsuario
+from usuarios.models import PerfilUsuario, Region
 from django.contrib.auth import authenticate,login
+from usuarios.forms import FormularioRegion
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views  import SuccessMessageMixin
+from django.views.generic import UpdateView, DeleteView
 
 # Create your views here.
 
@@ -98,4 +104,40 @@ def cambiarpassword(request):
             return redirect(to="perfil")
     
     return render(request,"registration/cambiarpassword.html",contexto)
+
+def formRegion(request):
+    form = FormularioRegion(request.POST or None)
+    if request.method == 'POST' :
+        form = FormularioRegion(data = request.POST, files=request.FILES)
+        if form.is_valid():
+            categoria = form.save(commit=False)
+            categoria.save()
+            messages.success(request, 'region creada exitosamente')
+            return redirect('home')
+    
+    return render(request,'registration/formRegion.html',{'form': form})
+
+
+
+
+def listadoRegion(request):
+    region = Region.objects.all()
+    return render(request, 'registration/listadoRegion.html', { 'region':region })
+
+class RegionUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    login_url = 'login'
+    model = Region
+    form_class = FormularioRegion
+    template_name = 'registration/updateRegion.html'
+    
+    def get_success_url(self):
+        return resolve_url('listadoRegion')
+
+class RegionDeleteView(LoginRequiredMixin, DeleteView, SuccessMessageMixin):
+    login_url = 'login'
+    model = Region
+    template_name = 'registration/borrarRegion.html'
+    success_url = reverse_lazy('listadoRegion')
+    success_message = 'Region eliminada exitosamente'
+
 

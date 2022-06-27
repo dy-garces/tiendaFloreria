@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block contenido %}
+
+<div class="container">
+    <div class="row">
+         <div class="col-12">
+            <div class="card m-5 shadow border rounded">
+              <div class="card-body">
+                <form action="" method="post" class="m-5">
+                    {% csrf_token %}
+                    <div class="h4"> ¿Estas seguro de eliminar la Region?</div>
+                    <div class="h5">
+                        Numero de la Region: {{region.id}}
+                    </div>
+                    <div class="h5">
+                        Nombre de la Region: {{region.nombre}}
+                    </div>
+                    <input type="submit" value="Eliminar" class="btn btn-danger">
+                </form>
+              </div>
+            </div>
+         </div>
+    </div>
+</div>
+
+{% endblock contenido %}
