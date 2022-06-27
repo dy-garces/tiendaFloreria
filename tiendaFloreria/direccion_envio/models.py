@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class DireccionEnvio(models.Model):
+   
     user = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
     envio1 = models.CharField(max_length=200)
     ciudad = models.CharField(max_length=100)

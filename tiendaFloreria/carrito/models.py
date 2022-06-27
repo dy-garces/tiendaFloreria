@@ -3,7 +3,6 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
 from django.urls import reverse
 from productos.models import Producto
 from django.db.models.signals import pre_save,m2m_changed, post_save
@@ -11,6 +10,7 @@ from django.contrib import messages
 # Create your models here.
 
 class Carrito(models.Model):
+  
     carrito_id = models.CharField(max_length=100, null=False, blank=False, unique=True)
     usuario = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE) #relacion uno a muchos
     productos = models.ManyToManyField(Producto, through='CarritoProductos')
@@ -50,6 +50,7 @@ class CarritoProductosManager(models.Manager):
         
 
 class CarritoProductos(models.Model):
+    
     carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     cantidad = models.IntegerField(default=1)
