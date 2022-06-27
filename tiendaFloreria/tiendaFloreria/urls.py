@@ -20,11 +20,12 @@ from productos.views import PrductoListaView
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import productosViewSet
+from .views import  productosViewSet, ordenesViewSet
 from rest_framework import  routers
 
 router = routers.DefaultRouter()
 router.register("productos",productosViewSet)
+router.register("ordenes",ordenesViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -50,13 +51,10 @@ urlpatterns = [
     path('listadoRegion/',listadoRegion, name='listadoRegion'),
     path('updateRegion/<int:pk>',RegionUpdateView.as_view(),name='updateRegion'),
     path('borrarRegion/<int:pk>',RegionDeleteView.as_view(),name='borrarRegion'),
-    
     path('formComuna/',formComuna ,name='formComuna'),
     path('listadoComuna/',listadoComuna, name='listadoComuna'),
     path('updateComuna/<int:pk>',ComunaUpdateView.as_view(),name='updateComuna'),
     path('borrarComuna/<int:pk>',ComunaDeleteView.as_view(),name='borrarComuna'),
-    
-    
     
     path('api/',include(router.urls))
 ]

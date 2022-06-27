@@ -1,8 +1,9 @@
 from django.shortcuts import get_object_or_404, render, redirect
 
 from productos.models import Producto
+from ordenes.models import Ordenes
 from rest_framework import viewsets
-from .serializers import Producto_srlz
+from .serializers import Producto_srlz, Ordenes_srlz
 from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login
 
@@ -62,5 +63,10 @@ def producto(request):
 class productosViewSet(viewsets.ModelViewSet):
     queryset = Producto.objects.all()
     serializer_class = Producto_srlz
+
+class ordenesViewSet(viewsets.ModelViewSet):
+    queryset = Ordenes.objects.all()
+    serializer_class = Ordenes_srlz
+    
     
     
