@@ -4,7 +4,7 @@ from django.views.generic import ListView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from productos.models import Producto
 from django.urls import reverse_lazy
-from .forms import FormularioProducto
+from .forms import FormularioProducto, FormularioCategoria
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views  import SuccessMessageMixin
@@ -92,3 +92,15 @@ class ProductoDeleteView(LoginRequiredMixin, DeleteView, SuccessMessageMixin):
     success_url = reverse_lazy('productos:productoListado')
     success_message = 'Producto eliminado exitosamente'
 
+@login_required(login_url='login')
+def formCategoria(request):
+    form = FormularioCategoria(request.POST or None)
+    if request.method == 'POST' :
+        form = FormularioCategoria(data = request.POST, files=request.FILES)
+        if form.is_valid():
+            categoria = form.save(commit=False)
+            categoria.save()
+            messages.success(request, 'Categoria creado exitosamente')
+            return redirect('home')
+    
+    return render(request,'productos/formCategoria.html',{'form': form})

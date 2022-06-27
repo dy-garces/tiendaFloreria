@@ -1,7 +1,7 @@
 from cProfile import label
 from dataclasses import field
 from django import forms
-from .models import Producto
+from .models import Categoria, Producto
 
 
 class FormularioProducto(forms.ModelForm):
@@ -14,4 +14,13 @@ class FormularioProducto(forms.ModelForm):
            'descripcion' : 'Descripcion del Producto',
            'precio'      : 'Precio',
            'categoria'   : 'Categoria del Producto'
+        }
+        
+
+class FormularioCategoria(forms.ModelForm):
+    class Meta:
+        model = Categoria
+        fields = ["nombre"]
+        label = {
+           'nombre' : 'Nombre de la categoria',
         }

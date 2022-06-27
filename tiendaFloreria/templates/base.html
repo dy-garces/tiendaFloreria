@@ -79,6 +79,12 @@
                         {% endif %}
                         {% if user.is_authenticated %}
                         <li class="nav-item">
+                            <a class="nav-link" href=" {% url 'productos:formCategoria' %}">Agregar Categoria</a>
+                        </li>
+                    {% endif %}
+                        
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
                             <a class="nav-link" href=" {% url 'productos:productoListado' %}">Listado Producto</a>
                         </li>
                     {% endif %}
