@@ -1,6 +1,7 @@
 
+from operator import contains
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Ordenes
+from .models import Ordenes, status
 from carrito.models import Carrito
 from django.contrib.auth.decorators import login_required
 from .utilis import breadcrumb, destruir_orden
@@ -18,6 +19,9 @@ def orden(request):
     usuario = request.user if request.user.is_authenticated else None
     carrito_id = request.session.get('carrito_id')
     carrito = Carrito.objects.filter(id = carrito_id).first()
+    statusC =  status.objects.filter().first()
+    print(statusC)
+    
     
     if carrito is None:
         carrito = Carrito.objects.create(usuario = usuario)
@@ -29,9 +33,9 @@ def orden(request):
     request.session['carrito_id'] = carrito.id
     
     orden = Ordenes.objects.filter(carrito = carrito).first()
-    
+
     if orden is None and request.user.is_authenticated:
-        orden = Ordenes.objects.create(carrito = carrito, usuario = request.user)
+        orden = Ordenes.objects.create(carrito = carrito, usuario = request.user ,status = statusC) 
         
     if orden:
         request.session['orden_id'] = orden.orden_id
@@ -123,6 +127,8 @@ def cancelar(request):
     usuario = request.user if request.user.is_authenticated else None
     carrito_id = request.session.get('carrito_id')
     carrito = Carrito.objects.filter(id = carrito_id).first()
+    statusC =  status.objects.get(nombre='Cancelado')
+    print(statusC)
     
     if carrito is None:
         carrito = Carrito.objects.create(usuario = usuario)
@@ -136,7 +142,7 @@ def cancelar(request):
     orden = Ordenes.objects.filter(carrito = carrito).first()
     
     if orden is None and request.user.is_authenticated:
-        orden = Ordenes.objects.create(carrito = carrito, usuario = request.user)
+        orden = Ordenes.objects.create(carrito = carrito, usuario = request.user )
         
     if orden:
         request.session['orden_id'] = orden.orden_id
@@ -144,7 +150,8 @@ def cancelar(request):
     if request.user != orden.usuario:
         return redirect('carrito:carrito')
         
-    orden.cancelar()
+    orden.status =  statusC
+    orden.save()
     
     destruir_carrito(request)
     destruir_orden(request)
@@ -177,8 +184,7 @@ def completar(request):
         
     if request.user != orden.usuario:
         return redirect('carrito:carrito')
-    
-    orden.completar()
+
     
     destruir_carrito(request)
     destruir_orden(request)
@@ -216,8 +222,9 @@ def seguimientoCompra(request,id):
     
 def empaquetado(request,id):
     orden = Ordenes.objects.filter(id=id).first()
-    orden.status = orden.empaquetado()
-    
+    statusC =  status.objects.get(nombre='Empaquetado')
+    orden.status = statusC
+    orden.save()
     destruir_carrito(request)
     destruir_orden(request)
     
@@ -226,7 +233,9 @@ def empaquetado(request,id):
 
 def despachado(request,id):
     orden = Ordenes.objects.filter(id=id).first()
-    orden.status = orden.despachado()
+    statusC =  status.objects.get(nombre='Enviado')
+    orden.status = statusC
+    orden.save()
     
     destruir_carrito(request)
     destruir_orden(request)
@@ -236,7 +245,9 @@ def despachado(request,id):
 
 def entregado(request,id):
     orden = Ordenes.objects.filter(id=id).first()
-    orden.status = orden.entregado()
+    statusC =  status.objects.get(nombre='Entregado')
+    orden.status = statusC
+    orden.save()
     
     destruir_carrito(request)
     destruir_orden(request)
