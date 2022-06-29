@@ -73,10 +73,6 @@ def actualizar_subtotal(sender, instance, action ,*args, **kwargs):
         instance.actualizar_subtotal()
         
 
-
-
-
-
 def post_save_actualizar_subtotal(sender, instance, *args, **kwargs):
     instance.carrito.actualizar_subtotal()
 

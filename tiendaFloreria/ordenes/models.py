@@ -15,7 +15,6 @@ class status(models.Model):
         return self.nombre 
 
 class Ordenes(models.Model):
-    
     orden_id = models.CharField(max_length=100, null=False, blank=False, unique=True)
     usuario = models.ForeignKey(User, on_delete = models.CASCADE)
     carrito = models.ForeignKey(Carrito, on_delete = models.CASCADE)
@@ -33,7 +32,8 @@ class Ordenes(models.Model):
         self.save()
     
     def get_total(self):
-        return self.carrito.total + self.envio
+        print( self.carrito.subtotal)
+        return self.carrito.subtotal + self.envio
     
 def set_orden_id(sender, instance, *args, **kwargs):
     if not instance.orden_id:
