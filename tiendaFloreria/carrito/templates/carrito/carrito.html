@@ -7,40 +7,39 @@
     {% if carrito.productos.exists %}
     <div class="row">
         <div class="col-8">
-            <table class="table">
+            <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
+                        <th scope="col">Registro</th>
+                        <th scope="col">Imagen</th>
+                        <th scope="col">Opciones</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col">Precio</th>
                     </tr>
                 </thead>
                 <tbody>
-
                     {% for cp in carrito.productos_relacion %}
                         {% with productos=cp.producto %}
                             <tr>
-                                <th>
+                                <td data-label="Num">
                                     {{ forloop.counter }}
-                                </th>
-                                <th>
+                                </td>
+                                <td data-label="Img">
                                     {% if productos.imagen %}
-                                    <img src="{{ productos.imagen.url }} " alt="imagen" class="img-fluid m-3" width="150"
-                                        height="150">
+                                    <img src="{{ productos.imagen.url }} " alt="imagen" class="img-fluid m-3" width="50"
+                                        height="50">
                                     {% endif %}
-                                </th>
-                                <th>
+                                </td>
+                                <td data-label="Producto">
                                     <a href="{% url 'productos:producto' productos.slug %}"> {{productos.nombre}}</a>
                                     {% include 'carrito/snippets/eliminar.html' %}
                                 </th>
-                                <th>
-                                   {{ cp.cantidad }}
-                                </th>
-                                <th>
+                                <td data-label="Cantidad">
+                                    {{ cp.cantidad }}
+                                </td>
+                                <td>
                                     <span class="font-weigth-bold text-success"> ${{ productos.precio | intcomma }} </span>
-                                </th>
+                                </td>
                             </tr>
                         {% endwith %}
                     {% endfor %}
