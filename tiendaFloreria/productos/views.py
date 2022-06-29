@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,permission_required
 from django.shortcuts import redirect, render, resolve_url
 from django.views.generic import ListView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
@@ -48,6 +48,7 @@ class ProductoBuscarListView(ListView):
         return context  
 
 @login_required(login_url='login')
+@permission_required('productos.add_producto',raise_exception=True)
 def formProducto(request):
     form = FormularioProducto(request.POST or None)
     if request.method == 'POST' :

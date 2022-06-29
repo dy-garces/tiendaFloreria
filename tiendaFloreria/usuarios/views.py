@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views  import SuccessMessageMixin
 from django.views.generic import UpdateView, DeleteView
-
+from django.contrib.auth.models import Group,User
 # Create your views here.
 
 
@@ -25,6 +25,11 @@ def registro(request):
             form.save()
             credenciales=authenticate(username=form.cleaned_data["username"],password=form.cleaned_data["password1"])
             login(request,credenciales)
+            grupo=Group.objects.get(name="Usuario")
+            datos=form.cleaned_data
+            usrnombre=datos.get("username")
+            usuario=User.objects.get(username=usrnombre)
+            grupo.user_set.add(usuario)
             return redirect(to="perfilusuario")
     
     return render(request,"registration/registro.html",contexto)
@@ -43,6 +48,7 @@ def perfilusuario(request):
             perfil.nombre=datos.get("nombre")
             perfil.apellido=datos.get("apellido")
             perfil.fecha_nac=datos.get("fecha_nac")
+            perfil.direccion=datos.get("direccion")
             perfil.correo=datos.get("correo")
             perfil.numero=datos.get("numero")
             perfil.comuna=datos.get("comuna")
@@ -50,7 +56,22 @@ def perfilusuario(request):
             perfil.vendedor=datos.get("vendedor")
             perfil.suscrito=datos.get("suscrito")
             perfil.nombre_usuario=request.user.username
-            perfil.save()         
+            perfil.save()
+            if perfil.vendedor==True:
+                newgrupo=Group.objects.get(name="Vendedor")
+                oldgrupo=Group.objects.get(name="Usuario")
+                usrnombre=perfil.nombre_usuario
+                usuario=User.objects.get(username=usrnombre)
+                newgrupo.user_set.add(usuario)
+                oldgrupo.user_set.remove(usuario)
+            else:
+                newgrupo=Group.objects.get(name="Usuario")
+                oldgrupo=Group.objects.get(name="Vendedor")
+                usrnombre=perfil.nombre_usuario
+                usuario=User.objects.get(username=usrnombre)
+                newgrupo.user_set.add(usuario)
+                oldgrupo.user_set.remove(usuario)
+            
             return redirect(to="home")
         
     return render(request,"registration/perfilusuario.html",contexto)
@@ -61,6 +82,24 @@ def perfil(request):
         'perfil' : perfil
     }
     return render(request,"perfil.html",data)
+
+def cambiarpassword(request,id):
+    perfilusuario=get_object_or_404(User,username=id)
+    form=PasswordChangeForm(instance=perfilusuario)
+    contexto={
+        "frm":form
+    }
+    
+    if request.method=="POST":
+        form=PasswordChangeForm(data=request.POST,instance=perfilusuario)
+        if form.is_valid():
+            perfilusuario_mod=User.objects.get(username=perfilusuario.username)
+            datos=form.cleaned_data
+            perfilusuario_mod.password=datos.get("new_password1")
+            perfilusuario_mod.save()
+            return redirect(to="perfil")
+    
+    return render(request,"registration/cambiarpassword.html",contexto)
 
 def modificarusuario(request,id):
     perfilusuario=get_object_or_404(PerfilUsuario,nombre_usuario=id)
@@ -86,24 +125,26 @@ def modificarusuario(request,id):
             perfilusuario_mod.vendedor=datos.get("vendedor")
             perfilusuario_mod.suscrito=datos.get("suscrito")
             perfilusuario_mod.save()
+            if perfilusuario_mod.vendedor==True:
+                newgrupo=Group.objects.get(name="Vendedor")
+                oldgrupo=Group.objects.get(name="Usuario")
+                usrnombre=perfilusuario_mod.nombre_usuario
+                usuario=User.objects.get(username=usrnombre)
+                newgrupo.user_set.add(usuario)
+                oldgrupo.user_set.remove(usuario)
+            else:
+                newgrupo=Group.objects.get(name="Usuario")
+                oldgrupo=Group.objects.get(name="Vendedor")
+                usrnombre=perfilusuario_mod.nombre_usuario
+                usuario=User.objects.get(username=usrnombre)
+                newgrupo.user_set.add(usuario)
+                oldgrupo.user_set.remove(usuario)
             return redirect(to="perfil")
             
         
     return render(request,"modificarusuario.html",contexto)
 
-def cambiarpassword(request):
-    form=PasswordChangeForm(request.POST or None)
-    contexto={
-        "frm":form
-    }
-    
-    if request.method=="POST":
-        form=PasswordChangeForm(data=request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(to="perfil")
-    
-    return render(request,"registration/cambiarpassword.html",contexto)
+
 
 def formRegion(request):
     form = FormularioRegion(request.POST or None)

@@ -9,5 +9,5 @@ class frmPerfilUsuario(forms.ModelForm):
     class Meta:
         model = PerfilUsuario
         fields=["rut","nombre","apellido"
-        ,"fecha_nac","correo","numero"
+        ,"fecha_nac","direccion","correo","numero"
         ,"comuna","imagen","vendedor","suscrito"]

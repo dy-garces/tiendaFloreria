@@ -57,33 +57,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'quienesSomos'%}">Quienes Somos</a>
                         </li>
-                        {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'ordenes:completados'%}">Mis pedidos</a>
-                        </li>
-                        {% endif %}
-                        {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'ordenes:allOrdenes'%}">All Ordenes</a>
-                        </li>
-                        {% endif %}
-                        {% if user.is_authenticated %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'direccion_envio:direccion_envio'%}">Direcciones</a>
-                            </li>
-                        {% endif %}
-                        {% if user.is_authenticated %}
-                            <li class="nav-item">
-                                <a class="nav-link" href=" {% url 'productos:formProducto' %}">Agregar Producto</a>
-                            </li>
-                        {% endif %}
-                       
-                        
-                        {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href=" {% url 'productos:productoListado' %}">Listado Producto</a>
-                        </li>
-                    {% endif %}
                     </ul>
                     <div class="d-flex m-1">
                         <a href="{% url 'carrito:carrito'%}" class="text-light">
@@ -115,49 +88,6 @@
                         </li>
                         {% endif %}
                     </ul>  
-                </div>
-            </div>
-        </nav>
-        <nav class="navbar navbar-expand-xl navbar-dark bg-success">
-            <div class="container-fluid">
-                <button class="navbar-toggler nav-item" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#mynavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="mynavbar">
-                    <ul class="navbar-nav me-auto">
-                        {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href=" {% url 'productos:formCategoria' %}">Agregar Categoria</a>
-                        </li>
-                    {% endif %}
-                    {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href=" {% url 'productos:listadoCategoria' %}">Listado Categoria</a>
-                        </li>
-                    {% endif %}
-                    {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href=" {% url 'formRegion' %}">Registrar Region</a>
-                        </li>
-                    {% endif %}
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href=" {% url 'listadoRegion' %}">Listado de  Regiones</a>
-                    </li>
-                {% endif %}
-                {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href=" {% url 'formComuna' %}">Registrar Comuna</a>
-                        </li>
-                    {% endif %}
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href=" {% url 'listadoComuna' %}">Listado de  Comuna</a>
-                    </li>
-                {% endif %}
-                        <li class="nav-item">
-                    </ul>
                 </div>
             </div>
         </nav>
