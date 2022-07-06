@@ -10,6 +10,7 @@ class RutValidador {
     }
 
     validar() {
+        rut=document.getElementById(id_rut);
         let numerosArray = this.rut.split('').reverse()
         let acumulador = 0;
         let multiplicador = 2;
@@ -32,6 +33,7 @@ class RutValidador {
     }
 
     formato() {
+        rut=document.getElementById(id_rut);
         if (!this.esValido) return '';
 
         return (this.rut.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')) + '-' + this.dv;

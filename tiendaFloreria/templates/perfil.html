@@ -46,20 +46,20 @@
                                     <div class="row">
                                         <h5 style="text-align: center;">Usuario</h5>
                                         <p style="text-align: center;">Administracion de usuario</p>
-                                        <button type="button" class="btn btn-success text-light mb-3"><a href="{% url 'modificarusuario' p.nombre_usuario %}" 
+                                        <button type="button" class="btn btn-sm btn-success text-light mb-3"><a href="{% url 'modificarusuario' p.nombre_usuario %}" 
                                             class="nav-link text-light">Editar Informacion</a>
                                         </button>
                                         {% if p.suscrito == 0 %}
-                                        <button type="button" class="btn btn-success text-light mb-3"><a
+                                        <button type="button" class="btn btn-sm btn-success text-light mb-3"><a
                                             class="nav-link text-light" href="pagarSubscripcion.html">Subscribirse</a>
                                         </button>
                                         {% else %}
                                       
                                         {% endif %} 
-                                        <button type="button" class="btn btn-success text-light mb-3"><a href="{% url 'cambiarpassword'%}" 
+                                        <button type="button" class="btn btn-sm btn-success text-light mb-3"><a href="{% url 'cambiarpassword'%}" 
                                             class="nav-link text-light">Cambiar contraseña</a>
                                         </button>
-                                        <button type="button" class="btn btn-success text-light mb-3" style="float:right ;"><a
+                                        <button type="button" class="btn btn-sm btn-success text-light mb-3" style="float:right ;"><a
                                             class="nav-link text-light" href="{% url 'logout' %}">Cerrar Sesion</a>
                                         </button>
                                     </div>
@@ -70,15 +70,13 @@
                                 <p style="text-align: center;">Administracion de compras</p>
                                 <div class="container">
                                     <div class="row">
-                                        <button type="button" class="btn btn-success text-light mb-3" style="float:left;"><a
-                                            class="nav-link text-light" href="historial_compras.html">Historial de
-                                            compras</a> </button>
-                                        <button type="button" class="btn btn-success text-light mb-3" style="float:right;"><a
+                                        <button type="button" class="btn btn-sm btn-success text-light mb-3" style="float:left;"><a
+                                            class="nav-link text-light" href="historial_compras.html">Historial de compras</a> </button>
+                                        <button type="button" class="btn btn-sm btn-success text-light mb-3" style="float:right;"><a
                                             class="nav-link text-light" href="pedidos.html">Pedidos</a>
                                         </button>
-                                        <button type="button" class="btn btn-success text-light mb-3" style="float:left;"><a
-                                            class="nav-link text-light" href="seguimiento_compra.html">Seguimiento de
-                                            compras</a>
+                                        <button type="button" class="btn btn-sm btn-success text-light mb-3" style="float:left;"><a
+                                            class="nav-link text-light" href="seguimientoCompra.html">Seguimiento de compras</a>
                                         </button>
                                     </div>
                                 </div>
