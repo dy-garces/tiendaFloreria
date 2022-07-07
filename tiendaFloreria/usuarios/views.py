@@ -195,3 +195,9 @@ class ComunaDeleteView(LoginRequiredMixin, DeleteView, SuccessMessageMixin):
     success_message = 'Comuna eliminada exitosamente'
 
 
+def personas(request):
+    personas = PerfilUsuario.objects.all()
+    data = {
+        'personas' : personas
+    }
+    return render(request,"personas.html",data)

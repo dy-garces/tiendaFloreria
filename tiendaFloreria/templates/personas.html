@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block contenido %}
+<section>
+    <div class="p-5 bg-light">
+        <div class="container">
+            <div class="d-flex justify-content-">
+                <a href="{% url 'registro' %}" class="btn btn-success">Crear Nuevo Usuario</a>
+            </div>
+            <h1 class="display-3 text-center bg-light">Mis Productos</h1>
+        </div>
+        <div class="container">
+            {% for p in personas %}
+            <div class="card border rounded shadow"> 
+                <div class="card-body">
+                    <div class="d-inline-block">
+                        {% if p.imagen %}
+                        <img src="{{ p.imagen.url }} " alt="imagen" class="img-fluid" width="200" height="200">
+                        {% endif %}
+                    </div>
+                    <div class="d-inline-block">
+                        <h5 class="card-title">Nombre del ususario:   {{p.nombre}} {{p.apellido}}</h5>
+                        <p class="card-text m-1">Nombre:  {{p.nombre_usuario}} </p>
+                        <p class="card-text m-1">Rut:  {{p.rut}} </p>
+                        <p class="card-text m-1">Correo: {{p.correo}} </p>
+                        <p class="card-text m-1">Comuna: {{p.comuna}} </p>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <a href="{% url 'modificarusuario' p.nombre_usuario %}" class="btn btn-success">Actualizar</a>
+                    </div>
+                </div>
+            </div>
+            <br>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock contenido %}

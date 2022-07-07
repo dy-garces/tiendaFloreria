@@ -24,7 +24,7 @@
                             </div>
                             <div class="col-sm-8">
                                 <div class="container">
-                                    <h5>Nombre del ususario: {{p.nombre}} {{p.apellido}}</h2>
+                                    <h5>Nombre del ususario: {{p.nombre}} {{p.apellido}}</h5>
                                     <br>
                                     <h5>Correo Electronico: {{ p.correo }}</h5>
                                     <br>
@@ -112,7 +112,7 @@
                                 <h2 class="text-center">ADMIN</h2>
                                 <div class="card">
                                     <div class="card-body">
-                                        
+                                        <img src="{% static 'img/vendedor.webp' %}" alt="imagen" class="img-fluid">
                                     </div>
                                 </div>
                             </div>    
@@ -207,16 +207,7 @@
                                                 <div class="row">
                                                     <p style="text-align: center;">Administracion de personas</p>
                                                     <button type="button" class="btn btn-success text-light mb-3"><a 
-                                                        class="nav-link text-light" href=" {% url 'formRegion' %}">Registrar Region</a>
-                                                    </button>
-                                                    <button type="button" class="btn btn-success text-light mb-3"><a 
-                                                        class="nav-link text-light" href=" {% url 'listadoRegion' %}">Listado de  Regiones</a>
-                                                    </button>
-                                                    <button type="button" class="btn btn-success text-light mb-3"><a 
-                                                        class="nav-link text-light" href=" {% url 'formComuna' %}">Registrar Comuna</a>
-                                                    </button>
-                                                    <button type="button" class="btn btn-success text-light mb-3"><a 
-                                                        class="nav-link text-light" href=" {% url 'listadoComuna' %}">Listado de  Comuna</a>
+                                                        class="nav-link text-light" href=" {% url 'personas' %}">Listado personas</a>
                                                     </button>
                                                 </div>
                                             </div>
