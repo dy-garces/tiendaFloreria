@@ -72,11 +72,6 @@ def actualizar_subtotal(sender, instance, action ,*args, **kwargs):
     if action == 'post_add' or action == 'post_remove' or action == 'post_clear':
         instance.actualizar_subtotal()
         
-
-
-
-
-
 def post_save_actualizar_subtotal(sender, instance, *args, **kwargs):
     instance.carrito.actualizar_subtotal()
 

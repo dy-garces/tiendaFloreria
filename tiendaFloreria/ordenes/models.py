@@ -33,7 +33,8 @@ class Ordenes(models.Model):
         self.save()
     
     def get_total(self):
-        return self.carrito.total + self.envio
+        print( self.carrito.subtotal)
+        return self.carrito.subtotal + self.envio
     
 def set_orden_id(sender, instance, *args, **kwargs):
     if not instance.orden_id:
