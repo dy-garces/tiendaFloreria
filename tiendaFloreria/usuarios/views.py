@@ -42,20 +42,8 @@ def perfilusuario(request):
     if request.method=="POST":
         form=frmPerfilUsuario(data=request.POST, files=request.FILES)
         if form.is_valid():
-            datos=form.cleaned_data
-            perfil=PerfilUsuario()
-            perfil.rut=datos.get("rut")
-            perfil.nombre=datos.get("nombre")
-            perfil.apellido=datos.get("apellido")
-            perfil.fecha_nac=datos.get("fecha_nac")
-            perfil.direccion=datos.get("direccion")
-            perfil.correo=datos.get("correo")
-            perfil.numero=datos.get("numero")
-            perfil.comuna=datos.get("comuna")
-            perfil.imagen=datos.get("imagen")
-            perfil.vendedor=datos.get("vendedor")
-            perfil.suscrito=datos.get("suscrito")
-            perfil.nombre_usuario=request.user.username
+            perfil = form.save(commit=False)
+            perfil.nombre_usuario=request.user
             perfil.save()
             if perfil.vendedor==True:
                 newgrupo=Group.objects.get(name="Vendedor")
@@ -83,20 +71,16 @@ def perfil(request):
     }
     return render(request,"perfil.html",data)
 
-def cambiarpassword(request,id):
-    perfilusuario=get_object_or_404(User,username=id)
-    form=PasswordChangeForm(instance=perfilusuario)
+def cambiarpassword(request):
+    form=PasswordChangeForm(request.POST or None)
     contexto={
-        "frm":form
+        "form":form
     }
     
     if request.method=="POST":
-        form=PasswordChangeForm(data=request.POST,instance=perfilusuario)
+        form=PasswordChangeForm(data=request.POST)
         if form.is_valid():
-            perfilusuario_mod=User.objects.get(username=perfilusuario.username)
-            datos=form.cleaned_data
-            perfilusuario_mod.password=datos.get("new_password1")
-            perfilusuario_mod.save()
+            form.save()
             return redirect(to="perfil")
     
     return render(request,"registration/cambiarpassword.html",contexto)

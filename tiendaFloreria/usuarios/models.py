@@ -27,7 +27,7 @@ class PerfilUsuario(models.Model):
     correo = models.EmailField()
     numero = models.IntegerField()
     comuna = models.ForeignKey(Comuna,on_delete=models.PROTECT)
-    imagen = models.ImageField(upload_to="productos/usuarios",null=True, blank=True)
+    imagen = models.ImageField(upload_to="personas",null=True, blank=True)
     vendedor=models.BooleanField(default=False)
     suscrito=models.BooleanField(default=False)
     
