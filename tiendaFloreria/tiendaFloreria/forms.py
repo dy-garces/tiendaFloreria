@@ -11,7 +11,7 @@ class frmPerfilUsuario(forms.ModelForm):
         model = PerfilUsuario
         fields=["rut","nombre","apellido"
         ,"fecha_nac","direccion","correo","numero"
-        ,"comuna","vendedor","suscrito"]
+        ,"comuna","imagen","vendedor"]
     def clean(self):
         super(frmPerfilUsuario, self).clean()
         ruts = self.cleaned_data.get('rut')

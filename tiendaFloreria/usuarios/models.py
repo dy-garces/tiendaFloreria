@@ -29,7 +29,6 @@ class PerfilUsuario(models.Model):
     comuna = models.ForeignKey(Comuna,on_delete=models.PROTECT)
     imagen = models.ImageField(upload_to="personas",null=True, blank=True)
     vendedor=models.BooleanField(default=False)
-    suscrito=models.BooleanField(default=False)
     
     def __str__(self):
         return self.nombre + " " + self.apellido

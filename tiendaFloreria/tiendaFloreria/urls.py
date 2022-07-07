@@ -20,12 +20,12 @@ from productos.views import PrductoListaView
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import  productosViewSet, ordenesViewSet
+from .views import  productosViewSet
 from rest_framework import  routers
 
 router = routers.DefaultRouter()
 router.register("productos",productosViewSet)
-router.register("ordenes",ordenesViewSet)
+# router.register("ordenes",ordenesViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
